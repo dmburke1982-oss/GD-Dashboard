@@ -50,22 +50,32 @@
         backdrop-filter: blur(10px);
         border-bottom:1px solid #1f2937;
         display:flex;
-        justify-content:center;
-        gap:20px;
-        padding:8px 16px;
+        justify-content:space-between;
+        align-items:center;
+        padding:6px 16px;
         font-size:13px;
     }
-    .main-nav a {
+    .nav-left {
+        display:flex;
+        gap:16px;
+        align-items:center;
+    }
+    .nav-left a {
         color:var(--text-muted);
         text-decoration:none;
         padding:4px 10px;
         border-radius:999px;
         border:1px solid transparent;
     }
-    .main-nav a:hover {
+    .nav-left a:hover {
         color:var(--text-main);
         border-color:#374151;
         background:#020617;
+    }
+    .nav-right {
+        font-size:12px;
+        color:var(--text-main);
+        font-variant-numeric:tabular-nums;
     }
 
     /* Floating top button */
@@ -91,7 +101,7 @@
 
     header {
         text-align:center;
-        margin-bottom:18px;
+        margin-bottom:12px;
     }
     header h1 {
         font-size:32px;
@@ -103,9 +113,65 @@
         margin:0;
     }
 
+    /* Gantt / semester bar */
+    #semester-gantt {
+        margin:10px 0 20px;
+        font-size:11px;
+        color:var(--text-muted);
+    }
+    #semester-gantt-label {
+        margin-bottom:4px;
+    }
+    .gantt-bar {
+        position:relative;
+        height:18px;
+        border-radius:999px;
+        background:#020617;
+        border:1px solid #1f2937;
+        overflow:hidden;
+    }
+    .gantt-weeks {
+        position:absolute;
+        inset:0;
+        display:grid;
+        grid-template-columns:repeat(19,1fr);
+        pointer-events:none;
+    }
+    .gantt-week-cell {
+        border-right:1px solid #111827;
+        position:relative;
+        font-size:9px;
+        text-align:center;
+        line-height:18px;
+        color:#6b7280;
+    }
+    .gantt-week-cell:last-child {
+        border-right:none;
+    }
+    .gantt-week-cell.current {
+        background:rgba(59,130,246,0.15);
+        color:#e5e7eb;
+    }
+    .gantt-progress {
+        position:absolute;
+        inset:0;
+        background:linear-gradient(90deg, rgba(59,130,246,0.25), rgba(34,197,94,0.2));
+        width:0%;
+        pointer-events:none;
+    }
+    .gantt-today-marker {
+        position:absolute;
+        top:-3px;
+        width:2px;
+        height:24px;
+        background:#facc15;
+        box-shadow:0 0 6px rgba(250,204,21,0.8);
+        pointer-events:none;
+    }
+
     /* Updates / News panel */
     #updates {
-        margin-bottom:24px;
+        margin-bottom:16px;
     }
     #updates details {
         background:var(--card);
@@ -183,6 +249,52 @@
         margin-bottom:2px;
     }
 
+    /* Assignments / Due list */
+    #assignments {
+        margin-bottom:20px;
+    }
+    #assignments details {
+        background:var(--card);
+        border-radius:14px;
+        border:1px solid var(--border);
+        overflow:hidden;
+        box-shadow:0 10px 30px rgba(0,0,0,0.35);
+        font-size:12px;
+    }
+    #assignments summary {
+        padding:10px 16px;
+        cursor:pointer;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        list-style:none;
+    }
+    #assignments summary::-webkit-details-marker { display:none; }
+    #assignments .assign-title { font-size:13px; font-weight:600; }
+    #assignments .assign-subtitle { font-size:11px; color:var(--text-muted); }
+    #assignments .chevron { font-size:14px; opacity:0.8; transition:0.2s; }
+    #assignments details[open] .chevron { transform:rotate(90deg); }
+    #assignments .assign-body {
+        border-top:1px solid var(--border);
+        padding:10px 16px 12px;
+    }
+    .assign-columns {
+        display:grid;
+        grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+        gap:10px;
+    }
+    .assign-col h4 {
+        margin:0 0 4px;
+        font-size:12px;
+        color:#e5e7eb;
+    }
+    .assign-col ul {
+        margin:0;
+        padding-left:16px;
+        font-size:11px;
+        color:var(--text-muted);
+    }
+
     /* Collapsibles */
     details.course, details.week, details.day-details {
         background:var(--card);
@@ -243,6 +355,47 @@
         min-height:16px;
     }
 
+    /* Presentation / handout placeholder */
+    .resource-placeholder {
+        margin-top:6px;
+        margin-bottom:4px;
+        padding:4px 6px;
+        border-radius:6px;
+        border:1px dashed #4b5563;
+        font-size:11px;
+        color:#9ca3af;
+        background:rgba(15,23,42,0.7);
+    }
+
+    /* Week checklists */
+    .week-checklists {
+        margin-top:8px;
+        padding-top:8px;
+        border-top:1px dashed #374151;
+        font-size:11px;
+    }
+    .week-checklists details {
+        margin-bottom:4px;
+        background:rgba(15,23,42,0.7);
+        border-radius:8px;
+        border:1px solid #374151;
+        box-shadow:none;
+    }
+    .week-checklists summary {
+        padding:6px 8px;
+        font-size:11px;
+    }
+    .week-checklists .checklist-body {
+        padding:6px 10px 8px;
+    }
+    .week-checklists ul {
+        margin:0;
+        padding-left:18px;
+    }
+    .week-checklists li {
+        margin-bottom:3px;
+    }
+
     /* Course themes */
     .course-gd details.course {
         border-left:3px solid var(--gd-accent);
@@ -278,7 +431,9 @@
     @media (max-width:640px) {
         body { padding:70px 8px 40px; }
         header h1 { font-size:26px; }
-        .main-nav { justify-content:space-between; gap:8px; font-size:12px; }
+        .main-nav { padding:6px 8px; }
+        .nav-left { gap:10px; }
+        #semester-gantt { font-size:10px; }
     }
 
     /* Print styles */
@@ -305,15 +460,20 @@
         header h1 { font-size:20px; }
         header h2 { font-size:12px; }
 
-        #updates {
+        #semester-gantt {
+            padding:0 16px 4px;
+        }
+        #updates, #assignments {
             padding:0 16px 8px;
         }
-        #updates details {
+        #updates details,
+        #assignments details {
             box-shadow:none;
             background:#ffffff;
             border-color:#d1d5db;
         }
-        #updates .updates-body {
+        #updates .updates-body,
+        #assignments .assign-body {
             padding:8px 10px 10px;
         }
 
@@ -338,6 +498,11 @@
             background:#f9fafb;
             border-color:#d1d5db;
         }
+        .resource-placeholder {
+            background:#f9fafb;
+            border-color:#d1d5db;
+            color:#4b5563;
+        }
         .page-break {
             page-break-before:always;
             border:none;
@@ -351,10 +516,16 @@
 <div id="top"></div>
 
 <nav class="main-nav">
-    <a href="#updates">Updates</a>
-    <a href="#gd">Graphic Design</a>
-    <a href="#hw">House Wiring</a>
-    <a href="#top">Top</a>
+    <div class="nav-left">
+        <a href="#updates">Updates</a>
+        <a href="#assignments">Assignments</a>
+        <a href="#gd">Graphic Design</a>
+        <a href="#hw">House Wiring</a>
+        <a href="#top">Top</a>
+    </div>
+    <div class="nav-right">
+        <span id="clock"></span>
+    </div>
 </nav>
 
 <a href="#top" class="floating-top">↑</a>
@@ -363,8 +534,18 @@
 
 <header>
     <h1>Mr. Burke — Classes Dashboard</h1>
-    <h2>Graphic Design & House Wiring • Weeks 1–19</h2>
+    <h2>Graphic Design & House Wiring • Weeks 1–19 (Semester ends Fri, Dec 19)</h2>
 </header>
+
+<!-- GANTT / SEMESTER BAR -->
+<div id="semester-gantt">
+    <div id="semester-gantt-label">Semester Progress (Week 1 → Week 19)</div>
+    <div class="gantt-bar">
+        <div class="gantt-progress" id="gantt-progress"></div>
+        <div class="gantt-weeks" id="gantt-weeks"></div>
+        <div class="gantt-today-marker" id="gantt-today-marker"></div>
+    </div>
+</div>
 
 <!-- UPDATES / NEWS -->
 <section id="updates">
@@ -386,6 +567,45 @@
     </details>
 </section>
 
+<!-- ASSIGNMENTS / DUE LIST (manual, simple) -->
+<section id="assignments">
+    <details>
+        <summary>
+            <div>
+                <div class="assign-title">Assignments / Due Dates Overview</div>
+                <div class="assign-subtitle">Simple glance list — edit directly in the HTML as needed.</div>
+            </div>
+            <span class="chevron">▶</span>
+        </summary>
+        <div class="assign-body">
+            <div class="assign-columns">
+                <div class="assign-col">
+                    <h4>Today</h4>
+                    <ul>
+                        <!-- Example: <li>GD: Phase 2 checkpoints</li> -->
+                    </ul>
+                </div>
+                <div class="assign-col">
+                    <h4>This Week</h4>
+                    <ul>
+                    </ul>
+                </div>
+                <div class="assign-col">
+                    <h4>Upcoming</h4>
+                    <ul>
+                        <!-- Example: <li>Week 18: Capstone presentations</li> -->
+                    </ul>
+                </div>
+                <div class="assign-col">
+                    <h4>Past Due / Late</h4>
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </details>
+</section>
+
 <!-- ====================================================== -->
 <!-- GRAPHIC DESIGN                                         -->
 <!-- ====================================================== -->
@@ -396,7 +616,7 @@
 <summary class="course-summary">
     <div>
         <div class="summary-title">Graphic Design</div>
-        <div class="summary-subtitle">Weeks 1–19 • Foundations to Capstone</div>
+        <div class="summary-subtitle">Weeks 1–19 • Foundations → Capstone</div>
     </div>
     <span class="chevron">▶</span>
 </summary>
@@ -410,8 +630,8 @@
     <details class="week">
     <summary class="week-summary">
         <div>
-            <div class="summary-title">Week 17</div>
-            <div class="summary-subtitle">Production Plan • Workflow Sequence • Asset Prep</div>
+            <div class="summary-title">Week 17 — Capstone Production Plan</div>
+            <div class="summary-subtitle">Unit: Capstone Phase 2 • Production Plan • Workflow Sequence • Asset Prep</div>
         </div>
         <span class="chevron">▶</span>
     </summary>
@@ -428,7 +648,10 @@
             <div class="block-label">WAL</div>
             <div class="block">Students finalize their Phase 2 Production Plan structure and confirm deliverables for their Capstone.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Model converting Phase 1 concept info into Phase 2: deliverables list, elements list, and workflow sequence.</div>
+            <div class="block">
+                Model converting Phase 1 concept info into Phase 2: deliverables list, elements list, and workflow sequence.
+                <div class="resource-placeholder">Placeholder: Insert Phase 2 overview presentation or modeling slides link here.</div>
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Students draft or revise Deliverables, Visible Elements, and Asset List for their project.</div>
             <div class="block-label">Success Criteria</div>
@@ -449,7 +672,9 @@
             <div class="block-label">WAL</div>
             <div class="block">Students refine workflow sequence steps and confirm required assets for each deliverable.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Demonstrate breaking production into small, trackable steps (5–12 steps per deliverable) with realistic timing.</div>
+            <div class="block">
+                Demonstrate breaking production into small, trackable steps (5–12 steps per deliverable) with realistic timing.
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Update workflow sequence and annotate which assets belong to which deliverables and steps.</div>
             <div class="block-label">Success Criteria</div>
@@ -470,7 +695,10 @@
             <div class="block-label">WAL</div>
             <div class="block">Students complete all Production Plan sections before Thursday’s independent production work.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Review sample strong Production Plans and walk through a checklist of required sections for completion.</div>
+            <div class="block">
+                Review sample strong Production Plans and walk through a checklist of required sections for completion.
+                <div class="resource-placeholder">Placeholder: Insert Production Plan checklist handout link here.</div>
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Students finalize all four Phase 2 sections and submit for approval.</div>
             <div class="block-label">Success Criteria</div>
@@ -491,7 +719,10 @@
             <div class="block-label">WAL</div>
             <div class="block">Students begin Phase 3: Asset Production using their approved Production Plans.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Demonstrate asset folder organization, file naming conventions, and version control for graphics and photos.</div>
+            <div class="block">
+                Demonstrate asset folder organization, file naming conventions, and version control for graphics and photos.
+                <div class="resource-placeholder">Placeholder: Insert file management / asset organization mini-handout link here.</div>
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Create Asset Folder and begin first assets (photos, drawings, vector icons, type samples).</div>
             <div class="block-label">Success Criteria</div>
@@ -529,8 +760,8 @@
     <details class="week">
     <summary class="week-summary">
         <div>
-            <div class="summary-title">Week 18</div>
-            <div class="summary-subtitle">Assembly • Refinement • Export • Presentations</div>
+            <div class="summary-title">Week 18 — Capstone Production & Presentation</div>
+            <div class="summary-subtitle">Unit: Capstone Phase 3 • Assembly • Refinement • Export • Presentations</div>
         </div>
         <span class="chevron">▶</span>
     </summary>
@@ -544,7 +775,10 @@
             <div class="block-label">WAL</div>
             <div class="block">Students assemble final compositions using their completed assets and layout plans.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Demo: layout refinement, alignment, grids, visual hierarchy, and color matching to the original concept.</div>
+            <div class="block">
+                Demo: layout refinement, alignment, grids, visual hierarchy, and color matching to the original concept.
+                <div class="resource-placeholder">Placeholder: Insert layout refinement demo file or step-by-step handout.</div>
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Students build a first complete draft of all required deliverables based on their Production Plan.</div>
             <div class="block-label">Success Criteria</div>
@@ -580,7 +814,10 @@
             <div class="block-label">WAL</div>
             <div class="block">Students finalize export settings for print and digital versions of the project.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Demo: exporting PDFs, RGB vs CMYK, bleed and slug, embedding fonts, and file compression.</div>
+            <div class="block">
+                Demo: exporting PDFs, RGB vs CMYK, bleed and slug, embedding fonts, and file compression.
+                <div class="resource-placeholder">Placeholder: Insert export settings cheat-sheet or slide.</div>
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Students export all deliverables according to the rubric and submit files for verification.</div>
             <div class="block-label">Success Criteria</div>
@@ -598,7 +835,10 @@
             <div class="block-label">WAL</div>
             <div class="block">Students assemble and rehearse their Capstone presentations.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Demo: presentation structure (concept → process → final) and design vocabulary for explaining choices.</div>
+            <div class="block">
+                Demo: presentation structure (concept → process → final) and design vocabulary for explaining choices.
+                <div class="resource-placeholder">Placeholder: Insert Capstone presentation template or guidelines handout.</div>
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Build slides or boards showing before/after, key assets, and final designs; rehearse short presentations.</div>
             <div class="block-label">Success Criteria</div>
@@ -629,12 +869,12 @@
     </div>
     </details>
 
-    <!-- WEEK 19 (filled; buffer / extension / clean-up) -->
+    <!-- WEEK 19 (aligned to finals week) -->
     <details class="week">
     <summary class="week-summary">
         <div>
-            <div class="summary-title">Week 19</div>
-            <div class="summary-subtitle">Make-ups • Portfolio polish • Course reflection</div>
+            <div class="summary-title">Week 19 — Finals & Reflection (GD)</div>
+            <div class="summary-subtitle">Unit: Course Closure • Make-ups • Portfolio polish • Reflection • Final Turn-in (Fri, Dec 19)</div>
         </div>
         <span class="chevron">▶</span>
     </summary>
@@ -646,15 +886,15 @@
         <div class="body day">
             <h4>GD Week 19 — Monday</h4>
             <div class="block-label">WAL</div>
-            <div class="block">Students identify missing or low-quality Capstone pieces and create a plan to fix them.</div>
+            <div class="block">Students identify missing or low-quality Capstone pieces and create a plan to fix them before Friday.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Review gradebook and rubric; show how to prioritize fixes with limited time.</div>
+            <div class="block">Review gradebook and rubric; show how to prioritize fixes with limited remaining time.</div>
             <div class="block-label">Practice</div>
             <div class="block">Students list missing/weak items and choose 1–2 high-impact fixes to complete first.</div>
             <div class="block-label">Success Criteria</div>
-            <div class="block">Each student has a written mini-plan for finishing or improving their Capstone work.</div>
+            <div class="block">Each student has a written mini-plan for finishing or improving their Capstone work by Friday.</div>
             <div class="block-label">Teacher Moves</div>
-            <div class="block">Support students in choosing realistic goals; mark who needs essential make-up vs. enrichment.</div>
+            <div class="block">Support students in choosing realistic goals; note who needs essential make-up vs. enrichment.</div>
         </div>
         </details>
 
@@ -684,7 +924,10 @@
             <div class="block-label">WAL</div>
             <div class="block">Students assemble a mini-portfolio of their strongest work from the semester.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Show how to select pieces that demonstrate a range of skills (type, layout, color, image editing).</div>
+            <div class="block">
+                Show how to select pieces that demonstrate a range of skills (type, layout, color, image editing).
+                <div class="resource-placeholder">Placeholder: Insert portfolio checklist or example portfolio link here.</div>
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Students choose 3–5 pieces and organize them into a simple digital or printed portfolio set.</div>
             <div class="block-label">Success Criteria</div>
@@ -712,21 +955,28 @@
         </div>
         </details>
 
-        <!-- FRI -->
+        <!-- FRI — FINAL SUBMISSION (Dec 19) -->
         <details class="day-details">
-        <summary class="day-summary"><span class="summary-title">Friday</span><span class="chevron">▶</span></summary>
+        <summary class="day-summary"><span class="summary-title">Friday (Final Day)</span><span class="chevron">▶</span></summary>
         <div class="body day">
-            <h4>GD Week 19 — Friday</h4>
+            <h4>GD Week 19 — Friday (Final Day — Dec 19)</h4>
             <div class="block-label">WAL</div>
-            <div class="block">Students close out the course by sharing one highlight and one takeaway from the semester.</div>
+            <div class="block">Students submit final Capstone work and any required portfolio artifacts.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Frame the share-out as a brief “designer exit ticket” connected to professional habits.</div>
+            <div class="block">Briefly review submission steps, file formats, and how to attach or upload final work.</div>
             <div class="block-label">Practice</div>
-            <div class="block">Circle or small-group share of highlights; optional gallery walk of portfolios.</div>
+            <div class="block">Students finalize uploads/links and confirm that all required components are submitted.</div>
             <div class="block-label">Success Criteria</div>
-            <div class="block">Every student shares at least one meaningful takeaway related to graphic design skills or mindset.</div>
+            <div class="block">Every student has submitted a final project file or link plus any required reflection/portfolio pieces.</div>
             <div class="block-label">Teacher Moves</div>
-            <div class="block">Capture notes for future course adjustments; thank students and close out expectations.</div>
+            <div class="block">Verify submissions as they arrive, record completion, and note any students needing an extension.</div>
+
+            <div class="block-label">Final Submission Link</div>
+            <div class="block">
+                <a href="https://YOUR_GD_FINAL_SUBMISSION_LINK_HERE" target="_blank">
+                    Submit your Graphic Design final (PDF, image, or link)
+                </a>
+            </div>
         </div>
         </details>
 
@@ -764,8 +1014,8 @@
     <details class="week">
     <summary class="week-summary">
         <div>
-            <div class="summary-title">Week 17</div>
-            <div class="summary-subtitle">Device installation • Wiring checks • Safety procedures</div>
+            <div class="summary-title">Week 17 — Devices & Corrections</div>
+            <div class="summary-subtitle">Unit: Half-Wall Capstone • Device installation • Wiring checks • Safety</div>
         </div>
         <span class="chevron">▶</span>
     </summary>
@@ -779,7 +1029,10 @@
             <div class="block-label">WAL</div>
             <div class="block">Students identify wiring errors and correct routing from previous work on the half-wall.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Model common wiring mistakes and basic residential code standards (staples, bends, stripping, box fill).</div>
+            <div class="block">
+                Model common wiring mistakes and basic residential code standards (staples, bends, stripping, box fill).
+                <div class="resource-placeholder">Placeholder: Insert code/safety summary handout or slide here.</div>
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Students inspect their wall wiring, fix incorrect runs, and prepare boxes for devices.</div>
             <div class="block-label">Success Criteria</div>
@@ -797,7 +1050,10 @@
             <div class="block-label">WAL</div>
             <div class="block">Students install outlets and switches following correct conductor placement and device orientation.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Demo: strip lengths, clockwise wire hooks, hot vs neutral placement, and basic switch loop wiring.</div>
+            <div class="block">
+                Demo: strip lengths, clockwise wire hooks, hot vs neutral placement, and basic switch loop wiring.
+                <div class="resource-placeholder">Placeholder: Insert outlet/switch wiring demo notes or diagram handout.</div>
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Students install outlet(s) and a single-pole or 3-way switch depending on their wall design.</div>
             <div class="block-label">Success Criteria</div>
@@ -815,7 +1071,9 @@
             <div class="block-label">WAL</div>
             <div class="block">Students test continuity and identify faults in their wired circuits.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Demo: multimeter continuity checks, open hot/neutral troubleshooting, and safe test procedures.</div>
+            <div class="block">
+                Demo: multimeter continuity checks, open hot/neutral troubleshooting, and safe test procedures.
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Students test each device and run, mark problem spots, and correct miswired connections.</div>
             <div class="block-label">Success Criteria</div>
@@ -868,8 +1126,8 @@
     <details class="week">
     <summary class="week-summary">
         <div>
-            <div class="summary-title">Week 18</div>
-            <div class="summary-subtitle">Final testing • Diagrams • Capstone documentation</div>
+            <div class="summary-title">Week 18 — Testing & Diagramming</div>
+            <div class="summary-subtitle">Unit: Half-Wall Capstone • Final testing • Diagrams • Documentation</div>
         </div>
         <span class="chevron">▶</span>
     </summary>
@@ -901,7 +1159,10 @@
             <div class="block-label">WAL</div>
             <div class="block">Students conduct full circuit testing and interpret tester results.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Demo: plug-in tester codes (hot/neutral reverse, open ground), resetting breakers, and tracing faults.</div>
+            <div class="block">
+                Demo: plug-in tester codes (hot/neutral reverse, open ground), resetting breakers, and tracing faults.
+                <div class="resource-placeholder">Placeholder: Insert tester code cheat-sheet or mini-poster.</div>
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Students test each outlet and switch circuit, logging results in a testing sheet.</div>
             <div class="block-label">Success Criteria</div>
@@ -919,7 +1180,10 @@
             <div class="block-label">WAL</div>
             <div class="block">Students create a final wiring diagram of their wall, using correct symbols and paths.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Demo: drawing the circuit accurately on paper or digitally, using symbols, labels, and clear routing.</div>
+            <div class="block">
+                Demo: drawing the circuit accurately on paper or digitally, using symbols, labels, and clear routing.
+                <div class="resource-placeholder">Placeholder: Insert wiring symbol key and diagram example handout.</div>
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Students diagram their entire wall, including power source, switches, outlets, and device connections.</div>
             <div class="block-label">Success Criteria</div>
@@ -968,12 +1232,12 @@
     </div>
     </details>
 
-    <!-- WEEK 19 (filled; clean-up / extension / reflection) -->
+    <!-- WEEK 19 (finals / closure for HW) -->
     <details class="week">
     <summary class="week-summary">
         <div>
-            <div class="summary-title">Week 19</div>
-            <div class="summary-subtitle">Clean-up • Enrichment labs • Course reflection</div>
+            <div class="summary-title">Week 19 — Finals & Reflection (HW)</div>
+            <div class="summary-subtitle">Unit: Course Closure • Cleanup • Enrichment labs • Reflection • Final Turn-in (Fri, Dec 19)</div>
         </div>
         <span class="chevron">▶</span>
     </summary>
@@ -1005,11 +1269,14 @@
             <div class="block-label">WAL</div>
             <div class="block">Students perform optional enrichment labs or skill refreshers (e.g., extra device wiring, tool drills).</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Set up short stations: strip-and-terminate practice, box fill scenarios, troubleshooting snapshots.</div>
+            <div class="block">
+                Set up short stations: strip-and-terminate practice, box fill scenarios, troubleshooting snapshots.
+                <div class="resource-placeholder">Placeholder: Insert enrichment lab station list or instruction sheet.</div>
+            </div>
             <div class="block-label">Practice</div>
             <div class="block">Students rotate through enrichment or spend time completing any approved make-up tasks.</div>
             <div class="block-label">Success Criteria</div>
-            <div class="block">Students either finish any remaining work or show improved proficiency on key wiring skills.</div>
+            <div class="block">Students either finish remaining work or show improved proficiency on key wiring skills.</div>
             <div class="block-label">Teacher Moves</div>
             <div class="block">Monitor station work, help students select the most useful practice station for their needs.</div>
         </div>
@@ -1051,21 +1318,28 @@
         </div>
         </details>
 
-        <!-- FRI -->
+        <!-- FRI — FINAL SUBMISSION (Dec 19) -->
         <details class="day-details">
-        <summary class="day-summary"><span class="summary-title">Friday</span><span class="chevron">▶</span></summary>
+        <summary class="day-summary"><span class="summary-title">Friday (Final Day)</span><span class="chevron">▶</span></summary>
         <div class="body day">
-            <h4>HW Week 19 — Friday</h4>
+            <h4>HW Week 19 — Friday (Final Day — Dec 19)</h4>
             <div class="block-label">WAL</div>
-            <div class="block">Students share final thoughts on what they learned about electrical work and career interests.</div>
+            <div class="block">Students submit any remaining documentation and complete course closure.</div>
             <div class="block-label">Instruction</div>
-            <div class="block">Frame closing discussion around pride in safe work, attention to detail, and future application.</div>
+            <div class="block">Clarify final turn-in expectations and any last-day procedures.</div>
             <div class="block-label">Practice</div>
-            <div class="block">Brief share-out in circle or small groups; optional anonymous feedback form for the course.</div>
+            <div class="block">Students confirm submissions, return remaining materials, and complete any final reflection prompts.</div>
             <div class="block-label">Success Criteria</div>
-            <div class="block">Each student shares at least one meaningful idea about skills or future goals connected to wiring.</div>
+            <div class="block">All required project and documentation components are submitted or accounted for.</div>
             <div class="block-label">Teacher Moves</div>
-            <div class="block">Listen for themes to inform future revisions; thank students and clearly close the course.</div>
+            <div class="block">Verify submissions, finalize grades, and document evidence for evaluation.</div>
+
+            <div class="block-label">Final Submission Link</div>
+            <div class="block">
+                <a href="https://YOUR_HW_FINAL_SUBMISSION_LINK_HERE" target="_blank">
+                    Submit your House Wiring final (photo set, PDF, or link)
+                </a>
+            </div>
         </div>
         </details>
 
@@ -1080,6 +1354,69 @@
 </div>
 
 <script>
+/* ---------------------- Clock (12-hour with AM/PM) ---------------------- */
+(function() {
+    const clockEl = document.getElementById('clock');
+    if (!clockEl) return;
+    function pad(n){ return n < 10 ? '0' + n : n; }
+    function tick() {
+        const now = new Date();
+        let h = now.getHours();
+        const m = now.getMinutes();
+        const ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12;
+        if (h === 0) h = 12;
+        clockEl.textContent = h + ':' + pad(m) + ' ' + ampm;
+    }
+    tick();
+    setInterval(tick, 1000);
+})();
+
+/* ---------------------- Gantt / Semester bar ---------------------- */
+(function() {
+    const weeksEl = document.getElementById('gantt-weeks');
+    const progressEl = document.getElementById('gantt-progress');
+    const markerEl = document.getElementById('gantt-today-marker');
+    if (!weeksEl || !progressEl || !markerEl) return;
+
+    const totalWeeks = 19;
+    const endDate = new Date('2025-12-19T23:59:59');
+    const startDate = new Date(endDate);
+    startDate.setDate(startDate.getDate() - (totalWeeks * 7) + 1); // approx Mon of Week 1
+    const today = new Date();
+
+    function clamp(num, min, max) {
+        return Math.min(Math.max(num, min), max);
+    }
+
+    // Build week cells with labels
+    for (let w = 1; w <= totalWeeks; w++) {
+        const div = document.createElement('div');
+        div.className = 'gantt-week-cell';
+        div.textContent = w;
+        div.title = 'Week ' + w;
+        weeksEl.appendChild(div);
+    }
+
+    const msTotal = endDate - startDate;
+    const msElapsed = today - startDate;
+    let percent = msTotal > 0 ? (msElapsed / msTotal) * 100 : 0;
+    percent = clamp(percent, 0, 100);
+
+    progressEl.style.width = percent + '%';
+    markerEl.style.left = percent + '%';
+
+    // Approx current week index
+    const daysElapsed = msElapsed / (1000 * 60 * 60 * 24);
+    let currentWeek = Math.floor(daysElapsed / 7) + 1;
+    currentWeek = clamp(currentWeek, 1, totalWeeks);
+
+    const cells = weeksEl.children;
+    if (cells[currentWeek - 1]) {
+        cells[currentWeek - 1].classList.add('current');
+    }
+})();
+
 /* ---------------------- Updates / News ---------------------- */
 (function() {
     const STORAGE_KEY = 'mb_updates_v1';
@@ -1126,19 +1463,21 @@
         });
     }
 
-    btn.addEventListener('click', () => {
-        const text = (textarea.value || '').trim();
-        if (!text) return;
-        const now = new Date();
-        const ts = now.toLocaleString(undefined, {
-            month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'
+    if (btn) {
+        btn.addEventListener('click', () => {
+            const text = (textarea.value || '').trim();
+            if (!text) return;
+            const now = new Date();
+            const ts = now.toLocaleString(undefined, {
+                month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'
+            });
+            const items = loadUpdates();
+            items.push({ time: ts, text });
+            saveUpdates(items);
+            textarea.value = '';
+            renderUpdates();
         });
-        const items = loadUpdates();
-        items.push({ time: ts, text });
-        saveUpdates(items);
-        textarea.value = '';
-        renderUpdates();
-    });
+    }
 
     renderUpdates();
 })();
@@ -1147,7 +1486,46 @@
 (function() {
     const days = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
 
-    function createSkeletonWeek(weekNumber, coursePrefix) {
+    // Unit labels (rough groupings; adjust in code if desired)
+    const gdUnitLabels = {
+        1:'Orientation & Tools',
+        2:'Design Elements',
+        3:'Design Principles',
+        4:'Typography',
+        5:'Layout & Composition',
+        6:'Color & Contrast',
+        7:'Photoshop Basics',
+        8:'Projects & Practice',
+        9:'Branding / Identity',
+        10:'Poster / Campaign',
+        11:'Pre-Capstone Projects',
+        12:'Pre-Capstone Projects',
+        13:'Capstone Phase 1 — Concept',
+        14:'Capstone Phase 1 — Concept',
+        15:'Capstone Phase 2 — Planning',
+        16:'Capstone Phase 2 — Planning'
+    };
+
+    const hwUnitLabels = {
+        1:'Orientation & Safety',
+        2:'Tools & Materials',
+        3:'Basic Circuits',
+        4:'Cable & Boxes',
+        5:'Half-Wall Planning',
+        6:'Half-Wall Rough-In',
+        7:'Receptacles',
+        8:'Switches',
+        9:'Lighting',
+        10:'Protection & Breakers',
+        11:'Code & Diagrams',
+        12:'Troubleshooting',
+        13:'Half-Wall Build',
+        14:'Half-Wall Build',
+        15:'Half-Wall Capstone',
+        16:'Half-Wall Capstone'
+    };
+
+    function createSkeletonWeek(weekNumber, coursePrefix, unitName) {
         const weekDetails = document.createElement('details');
         weekDetails.className = 'week';
 
@@ -1159,7 +1537,7 @@
         title.textContent = 'Week ' + weekNumber;
         const subtitle = document.createElement('div');
         subtitle.className = 'summary-subtitle';
-        subtitle.textContent = 'Skeleton week structure (WAL, Instruction, Practice, Success Criteria, Teacher Moves)';
+        subtitle.textContent = 'Unit: ' + (unitName || ('Unit ' + weekNumber)) + ' • Skeleton structure (WAL, Instruction, Practice, Success Criteria, Teacher Moves)';
         left.appendChild(title);
         left.appendChild(subtitle);
         const chev = document.createElement('span');
@@ -1219,9 +1597,50 @@
     const hwAnchor = document.getElementById('hw-skeleton-anchor');
 
     for (let w = 1; w <= 16; w++) {
-        if (gdAnchor) gdAnchor.appendChild(createSkeletonWeek(w, 'GD'));
-        if (hwAnchor) hwAnchor.appendChild(createSkeletonWeek(w, 'HW'));
+        if (gdAnchor) gdAnchor.appendChild(createSkeletonWeek(w, 'GD', gdUnitLabels[w]));
+        if (hwAnchor) hwAnchor.appendChild(createSkeletonWeek(w, 'HW', hwUnitLabels[w]));
     }
+})();
+
+/* ---------------------- Week Checklists (all weeks) ---------------------- */
+(function() {
+    const weekBodies = document.querySelectorAll('.week > .body');
+    weekBodies.forEach(weekBody => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'week-checklists';
+
+        const teacherDetails = document.createElement('details');
+        const teacherSummary = document.createElement('summary');
+        teacherSummary.textContent = 'Teacher Checklist (simple reminders)';
+        const teacherBody = document.createElement('div');
+        teacherBody.className = 'checklist-body';
+        teacherBody.innerHTML = '<ul>' +
+            '<li><input type="checkbox"> Materials ready</li>' +
+            '<li><input type="checkbox"> Slides/handouts linked</li>' +
+            '<li><input type="checkbox"> Tech checked (projector, software)</li>' +
+            '<li><input type="checkbox"> Assessment/exit tickets ready</li>' +
+        '</ul>';
+        teacherDetails.appendChild(teacherSummary);
+        teacherDetails.appendChild(teacherBody);
+
+        const studentDetails = document.createElement('details');
+        const studentSummary = document.createElement('summary');
+        studentSummary.textContent = 'Student Checklist (what should be done by end of week)';
+        const studentBody = document.createElement('div');
+        studentBody.className = 'checklist-body';
+        studentBody.innerHTML = '<ul>' +
+            '<li><input type="checkbox"> All daily tasks attempted</li>' +
+            '<li><input type="checkbox"> Any required uploads turned in</li>' +
+            '<li><input type="checkbox"> Missing work list checked</li>' +
+        '</ul>';
+        studentDetails.appendChild(studentSummary);
+        studentDetails.appendChild(studentBody);
+
+        wrapper.appendChild(teacherDetails);
+        wrapper.appendChild(studentDetails);
+
+        weekBody.appendChild(wrapper);
+    });
 })();
 
 /* ---------------------- Auto-open details on print ---------------------- */
