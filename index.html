@@ -2,41 +2,38 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mr. Burke — Class Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
     :root {
-        /* Light theme (default) */
-        --bg:#f3f4f6;
-        --bg-alt:#e5e7eb;
-        --card:#ffffff;
-        --card-soft:#f9fafb;
-        --border:#cbd5e1;
-        --border-subtle:#d1d5db;
-        --accent:#2563eb;
-        --accent-soft:rgba(37,99,235,0.08);
-        --accent-2:#7c3aed;
-        --accent-3:#16a34a;
-        --text-main:#0f172a;
-        --text-muted:#4b5563;
+        --bg:#020617;
+        --bg-alt:#020617;
+        --card:#020617;
+        --card-soft:#020617;
+        --border:#1f2937;
+        --border-subtle:#111827;
+        --accent:#38bdf8;
+        --accent-soft:rgba(56,189,248,0.15);
+        --accent-2:#a855f7;
+        --accent-3:#22c55e;
+        --text-main:#e5e7eb;
+        --text-muted:#9ca3af;
 
-        --gd-accent:#2563eb;
-        --gd-soft:rgba(37,99,235,0.08);
-        --hw-accent:#16a34a;
-        --hw-soft:rgba(22,163,74,0.08);
+        --gd-accent:#38bdf8;
+        --gd-soft:rgba(56,189,248,0.15);
+        --hw-accent:#22c55e;
+        --hw-soft:rgba(34,197,94,0.18);
     }
 
     * { box-sizing:border-box; }
 
-    html { scroll-behavior:smooth; }
-
     body {
-        background: radial-gradient(circle at top, #e5e7eb 0, #f9fafb 50%, #ffffff 100%);
-        color:var(--text-main);
         margin:0;
-        padding:70px 16px 60px;
+        padding:64px 12px 40px;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: radial-gradient(circle at top, #111827 0, #020617 50%, #000000 100%);
+        color:var(--text-main);
     }
 
     .shell {
@@ -44,116 +41,69 @@
         margin:0 auto;
     }
 
-    /* Sticky top navigation */
+    a { color:var(--accent); }
+
+    /* Top nav + clock */
     .main-nav {
         position:fixed;
         top:0;
         left:0;
         right:0;
         z-index:100;
-        background:rgba(249,250,251,0.96);
+        background:rgba(15,23,42,0.95);
         backdrop-filter: blur(10px);
-        border-bottom:1px solid #e5e7eb;
+        border-bottom:1px solid #1f2937;
         display:flex;
         justify-content:space-between;
         align-items:center;
-        padding:8px 16px;
-        font-size:13px;
+        padding:6px 10px;
+        font-size:12px;
     }
     .nav-left {
         display:flex;
-        gap:10px;
-        align-items:center;
+        gap:6px;
         flex-wrap:wrap;
     }
     .nav-left a {
-        color:var(--text-muted);
-        text-decoration:none;
-        padding:4px 10px;
+        padding:3px 8px;
         border-radius:999px;
         border:1px solid transparent;
+        text-decoration:none;
+        color:var(--text-muted);
         background:transparent;
     }
     .nav-left a:hover {
+        border-color:#374151;
+        background:#020617;
         color:var(--text-main);
-        border-color:#d1d5db;
-        background:#f3f4f6;
     }
     .nav-right {
         font-variant-numeric:tabular-nums;
-        display:flex;
-        align-items:center;
-        justify-content:flex-end;
-    }
-    #clock {
-        font-size:20px;
-        font-weight:600;
-        color:var(--text-main);
-        white-space:nowrap;
-    }
-
-    /* Floating buttons */
-    .floating-top {
-        position:fixed;
-        right:16px;
-        bottom:16px;
-        z-index:90;
-        width:38px;
-        height:38px;
-        border-radius:999px;
-        border:1px solid #d1d5db;
-        background:rgba(249,250,251,0.96);
-        color:#111827;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-size:18px;
-        text-decoration:none;
-        box-shadow:0 10px 25px rgba(0,0,0,0.2);
-    }
-    .floating-top:hover { background:#e5e7eb; }
-
-    .note-catcher-btn {
-        position:fixed;
-        left:16px;
-        bottom:16px;
-        z-index:90;
-        padding:8px 14px;
-        border-radius:999px;
-        border:1px solid #d1d5db;
-        background:#f97316;
-        color:#111827;
-        font-size:13px;
-        font-weight:500;
-        cursor:pointer;
-        box-shadow:0 10px 25px rgba(0,0,0,0.2);
-    }
-    .note-catcher-btn:hover {
-        background:#fb923c;
+        font-size:14px;
     }
 
     header {
         text-align:center;
-        margin-bottom:12px;
+        margin-bottom:16px;
     }
     header h1 {
-        font-size:30px;
-        margin:0 0 4px;
+        margin:0;
+        font-size:26px;
     }
     header h2 {
-        font-size:14px;
-        color:var(--text-muted);
-        margin:4px 0 0;
-    }
-    #today-line {
-        margin-top:4px;
+        margin:4px 0 2px;
         font-size:13px;
         color:var(--text-muted);
     }
+    #today-line {
+        margin-top:4px;
+        font-size:12px;
+        color:var(--text-muted);
+    }
 
-    /* Gantt / semester bar */
+    /* Gantt */
     #semester-gantt {
-        margin:10px 0 20px;
+        margin-bottom:18px;
         font-size:11px;
         color:var(--text-muted);
     }
@@ -164,8 +114,8 @@
         position:relative;
         height:18px;
         border-radius:999px;
-        background:#e5e7eb;
-        border:1px solid #d1d5db;
+        background:#020617;
+        border:1px solid #1f2937;
         overflow:hidden;
     }
     .gantt-weeks {
@@ -176,26 +126,24 @@
         pointer-events:none;
     }
     .gantt-week-cell {
-        border-right:1px solid #d1d5db;
-        position:relative;
+        border-right:1px solid #111827;
         font-size:9px;
         text-align:center;
         line-height:18px;
-        color:#9ca3af;
-        background:transparent;
+        color:#4b5563;
     }
     .gantt-week-cell:last-child {
         border-right:none;
     }
     .gantt-week-cell.current {
-        background:rgba(37,99,235,0.18);
-        color:#1f2937;
+        background:rgba(56,189,248,0.2);
+        color:#e5e7eb;
         font-weight:600;
     }
     .gantt-progress {
         position:absolute;
         inset:0;
-        background:linear-gradient(90deg, rgba(37,99,235,0.25), rgba(22,163,74,0.25));
+        background:linear-gradient(90deg, rgba(56,189,248,0.3), rgba(34,197,94,0.3));
         width:0%;
         pointer-events:none;
     }
@@ -209,167 +157,97 @@
         pointer-events:none;
     }
 
-    /* Panel shells */
+    /* Shared shell for cards */
     section {
         margin-bottom:16px;
     }
 
-    /* Updates / News panel */
-    #updates details {
+    details.block {
         background:var(--card);
         border-radius:14px;
         border:1px solid var(--border);
         overflow:hidden;
-        box-shadow:0 10px 25px rgba(0,0,0,0.12);
+        box-shadow:0 12px 30px rgba(0,0,0,0.6);
     }
-    #updates summary {
-        padding:12px 18px;
+    details.block summary {
+        list-style:none;
         cursor:pointer;
+        padding:10px 14px;
         display:flex;
         justify-content:space-between;
         align-items:center;
-        list-style:none;
-    }
-    #updates summary::-webkit-details-marker { display:none; }
-    #updates .updates-title { font-size:14px; font-weight:600; }
-    #updates .updates-subtitle { font-size:11px; color:var(--text-muted); }
-    #updates .chevron { font-size:14px; opacity:0.8; transition:0.2s; }
-    #updates details[open] .chevron { transform:rotate(90deg); }
-    #updates .updates-body {
-        border-top:1px solid var(--border);
-        padding:12px 18px 14px;
         font-size:13px;
     }
+    details.block summary::-webkit-details-marker { display:none; }
+    .summary-main { font-weight:600; }
+    .summary-sub { font-size:11px; color:var(--text-muted); }
+    .chevron { font-size:14px; opacity:0.8; transition:0.2s; }
+    details[open] > summary .chevron { transform:rotate(90deg); }
+    .card-body {
+        border-top:1px solid var(--border-subtle);
+        padding:10px 14px 12px;
+        font-size:12px;
+    }
+
+    /* Updates */
     #update-form {
         display:flex;
         flex-direction:column;
-        gap:8px;
-        margin-bottom:10px;
+        gap:6px;
+        margin-bottom:8px;
     }
     #update-text {
         width:100%;
-        min-height:50px;
+        min-height:48px;
         border-radius:8px;
-        border:1px solid #d1d5db;
-        background:#f9fafb;
+        border:1px solid #334155;
+        background:#020617;
         color:var(--text-main);
         padding:6px 8px;
-        font-family:inherit;
-        font-size:13px;
+        font-size:12px;
+        resize:vertical;
     }
     #update-btn {
         align-self:flex-end;
-        padding:4px 12px;
-        font-size:12px;
+        padding:4px 10px;
+        font-size:11px;
         border-radius:999px;
-        border:1px solid #d1d5db;
-        background:#e5e7eb;
+        border:1px solid #4b5563;
+        background:#111827;
         color:var(--text-main);
         cursor:pointer;
     }
-    #update-btn:hover {
-        background:#d1d5db;
-    }
+    #update-btn:hover { background:#1f2937; }
     #updates-list {
         display:flex;
         flex-direction:column;
         gap:6px;
-        max-height:200px;
+        max-height:190px;
         overflow-y:auto;
-        padding-right:4px;
     }
     .update-item {
         border-radius:8px;
-        border:1px solid #e5e7eb;
-        background:#f9fafb;
+        border:1px solid #1f2937;
+        background:#020617;
         padding:6px 8px;
         font-size:12px;
     }
     .update-meta {
         font-size:10px;
-        color:var(--text-muted);
+        color:#9ca3af;
         margin-bottom:2px;
     }
 
-    /* Global Notes panel */
-    #notes details {
-        background:var(--card);
-        border-radius:14px;
-        border:1px solid var(--border);
-        overflow:hidden;
-        box-shadow:0 10px 25px rgba(0,0,0,0.1);
-        font-size:13px;
-    }
-    #notes summary {
-        padding:10px 16px;
-        cursor:pointer;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        list-style:none;
-    }
-    #notes summary::-webkit-details-marker { display:none; }
-    #notes .notes-title { font-size:13px; font-weight:600; }
-    #notes .notes-subtitle { font-size:11px; color:var(--text-muted); }
-    #notes .chevron { font-size:14px; opacity:0.8; transition:0.2s; }
-    #notes details[open] .chevron { transform:rotate(90deg); }
-    #notes .notes-body {
-        border-top:1px solid var(--border);
-        padding:10px 16px 12px;
-    }
-    #global-notes {
-        width:100%;
-        min-height:70px;
-        border-radius:8px;
-        border:1px solid #d1d5db;
-        background:#f9fafb;
-        color:var(--text-main);
-        padding:6px 8px;
-        font-family:inherit;
-        font-size:13px;
-        resize:vertical;
-    }
-    #notes .notes-hint {
-        font-size:11px;
-        color:var(--text-muted);
-        margin-top:4px;
-    }
-
-    /* Assignments / Due list */
-    #assignments details {
-        background:var(--card);
-        border-radius:14px;
-        border:1px solid var(--border);
-        overflow:hidden;
-        box-shadow:0 10px 25px rgba(0,0,0,0.1);
-        font-size:12px;
-    }
-    #assignments summary {
-        padding:10px 16px;
-        cursor:pointer;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        list-style:none;
-    }
-    #assignments summary::-webkit-details-marker { display:none; }
-    #assignments .assign-title { font-size:13px; font-weight:600; }
-    #assignments .assign-subtitle { font-size:11px; color:var(--text-muted); }
-    #assignments .chevron { font-size:14px; opacity:0.8; transition:0.2s; }
-    #assignments details[open] .chevron { transform:rotate(90deg); }
-    #assignments .assign-body {
-        border-top:1px solid var(--border);
-        padding:10px 16px 12px;
-    }
+    /* Assignment tracker */
     .assign-columns {
         display:grid;
-        grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
+        grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
         gap:10px;
     }
     .assign-col h4 {
         margin:0 0 4px;
         font-size:12px;
-        color:#111827;
+        color:#e5e7eb;
     }
     .assign-col ul {
         margin:0;
@@ -378,579 +256,234 @@
         color:var(--text-muted);
     }
 
-    /* Shared Resources section (smaller, open in new tab) */
-    #shared-resources details {
-        background:var(--card);
-        border-radius:14px;
-        border:1px solid var(--border);
-        overflow:hidden;
-        box-shadow:0 10px 25px rgba(0,0,0,0.1);
-        font-size:12px;
-        margin-bottom:10px;
+    /* Universal resources */
+    .resource-list {
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+        gap:8px;
     }
-    #shared-resources summary {
-        padding:10px 16px;
-        cursor:pointer;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        list-style:none;
-    }
-    #shared-resources summary::-webkit-details-marker { display:none; }
-    #shared-resources .sr-title { font-size:13px; font-weight:600; }
-    #shared-resources .sr-subtitle { font-size:11px; color:var(--text-muted); }
-    #shared-resources .chevron { font-size:14px; opacity:0.8; transition:0.2s; }
-    #shared-resources details[open] .chevron { transform:rotate(90deg); }
-    #shared-resources .sr-body {
-        border-top:1px solid var(--border);
-        padding:10px 16px 12px;
-    }
-    .sr-card {
-        border-radius:10px;
-        border:1px solid #e5e7eb;
-        background:#f9fafb;
-        padding:8px 10px;
-        margin-bottom:8px;
-    }
-    .sr-card-title {
-        font-size:13px;
-        font-weight:600;
-        margin-bottom:2px;
-    }
-    .sr-card-text {
-        font-size:11px;
-        color:var(--text-muted);
-        margin-bottom:4px;
-    }
-    .sr-card a {
-        font-size:11px;
-        color:#2563eb;
-        text-decoration:underline;
-    }
-
-    /* QR / music section */
-    #qr-music {
-        background:var(--card);
-        border:1px solid var(--border);
-        border-radius:16px;
-        padding:20px;
-        margin:12px 0 16px;
-        box-shadow:0 10px 25px rgba(0,0,0,0.12);
-        text-align:center;
-    }
-    #qr-music h2 {
-        margin:0 0 6px;
-        font-size:18px;
-    }
-    #qr-music p {
-        margin:0 0 14px;
-        font-size:13px;
-        color:var(--text-muted);
-    }
-    .qr-row {
-        display:flex;
-        flex-wrap:wrap;
-        justify-content:center;
-        gap:24px;
-        margin-top:8px;
-    }
-    .qr-block {
-        min-width:180px;
-    }
-    .qr-block h3 {
-        font-size:14px;
-        margin:0 0 6px;
-    }
-    .qr-block img {
-        width:180px;
-        height:180px;
-        image-rendering:crisp-edges;
-    }
-    .submit-link-main {
-        margin-top:16px;
-        font-size:13px;
-    }
-    .submit-link-main a {
-        color:#2563eb;
-        text-decoration:underline;
-    }
-
-    .music-toggle {
-        margin-top:16px;
-    }
-    .music-toggle button {
-        padding:8px 12px;
-        font-size:13px;
-        background:#e5e7eb;
-        color:#111827;
-        border:1px solid #d1d5db;
+    .resource-list a {
+        display:block;
+        padding:6px 8px;
         border-radius:8px;
-        cursor:pointer;
+        border:1px solid #1f2937;
+        background:#020617;
+        text-decoration:none;
+        font-size:12px;
+        color:var(--text-main);
     }
-    .music-toggle button:hover {
-        background:#d1d5db;
+    .resource-list a span {
+        display:block;
+        font-size:11px;
+        color:var(--text-muted);
+        margin-top:2px;
+    }
+    .resource-list a:hover {
+        border-color:#38bdf8;
     }
 
     /* Communication / Remind */
-    #communication {
-        background:var(--card);
-        border-radius:16px;
-        border:1px solid var(--border);
-        padding:18px;
-        box-shadow:0 10px 25px rgba(0,0,0,0.12);
+    #communication .comm-grid {
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+        gap:10px;
     }
-    #communication h2 {
-        margin:0 0 4px;
-        font-size:18px;
-        color:var(--accent-2);
+    .comm-card {
+        border-radius:10px;
+        border:1px solid #1f2937;
+        background:#020617;
+        padding:8px 10px;
     }
-    #communication p {
-        margin:4px 0;
+    .comm-title {
         font-size:13px;
-        color:var(--text-muted);
+        font-weight:600;
+        margin-bottom:4px;
     }
-    .comm-row {
-        display:flex;
-        flex-wrap:wrap;
-        gap:18px;
-        margin-top:10px;
-        align-items:flex-start;
-    }
-    .comm-actions {
-        display:flex;
-        flex-direction:column;
-        gap:8px;
-        min-width:180px;
-    }
-    .comm-actions a {
-        display:inline-block;
-        padding:8px 12px;
-        border-radius:8px;
-        text-decoration:none;
-        font-size:13px;
-        border:1px solid transparent;
-        text-align:center;
-    }
-    .btn-remind {
-        background:var(--accent);
-        color:#ffffff;
-        border-color:var(--accent);
-    }
-    .btn-contact {
-        background:#e5e7eb;
-        color:#111827;
-        border-color:#d1d5db;
-    }
-    .btn-contact:hover {
-        background:#d1d5db;
-    }
-    .comm-qr img {
-        width:140px;
-        height:140px;
-    }
-    .comm-note {
+    .comm-body {
         font-size:11px;
         color:var(--text-muted);
-        margin-top:6px;
+        margin-bottom:6px;
     }
-
-    /* Course evaluation card */
-    #course-eval-home {
-        background:var(--card);
-        border-radius:16px;
-        border:1px solid var(--border);
-        padding:16px;
-        box-shadow:0 10px 25px rgba(0,0,0,0.12);
-    }
-    #course-eval-home h2 {
-        margin:0 0 4px;
-        font-size:16px;
-        color:var(--accent-3);
-    }
-    #course-eval-home p {
-        margin:4px 0 8px;
-        font-size:13px;
-        color:var(--text-muted);
-    }
-    #course-eval-home a {
+    .comm-card a {
         display:inline-block;
-        margin-right:8px;
-        margin-top:4px;
-        padding:6px 10px;
-        border-radius:8px;
-        border:1px solid #d1d5db;
+        margin-top:2px;
+        padding:5px 9px;
+        border-radius:7px;
+        border:1px solid #334155;
+        background:#111827;
+        font-size:11px;
         text-decoration:none;
-        font-size:12px;
-        color:#111827;
-        background:#e5e7eb;
+        color:var(--text-main);
     }
-    #course-eval-home a:hover {
-        background:#d1d5db;
+    .comm-card a:hover {
+        background:#1f2937;
     }
 
-    /* Collapsibles */
-    details.course, details.week, details.day-details {
+    /* Courses */
+    .course-section {
+        margin-top:18px;
+    }
+    details.course {
         background:var(--card);
-        border:1px solid var(--border);
         border-radius:14px;
-        margin-bottom:12px;
+        border:1px solid var(--border);
         overflow:hidden;
-        box-shadow:0 10px 25px rgba(0,0,0,0.12);
+        box-shadow:0 12px 30px rgba(0,0,0,0.6);
     }
-    details.week, details.day-details {
-        box-shadow:none;
-        border-radius:12px;
-    }
-    summary.course-summary,
-    summary.week-summary,
-    summary.day-summary {
+    summary.course-summary {
         list-style:none;
         cursor:pointer;
-        padding:14px 18px;
+        padding:12px 16px;
         display:flex;
         justify-content:space-between;
         align-items:center;
     }
-    summary::-webkit-details-marker { display:none; }
-
-    .summary-title { font-size:16px; font-weight:600; }
-    .summary-subtitle { font-size:12px; color:var(--text-muted); }
-    .chevron { font-size:14px; opacity:0.8; transition:0.2s; }
-    details[open] > summary .chevron { transform:rotate(90deg); }
-
-    .body {
-        padding:14px 20px 18px;
-        border-top:1px solid var(--border);
+    summary.course-summary::-webkit-details-marker { display:none; }
+    .course-title {
+        font-size:16px;
+        font-weight:600;
     }
-
-    .day {
-        padding:10px;
-        background:var(--card-soft);
-        border-radius:10px;
-        border:1px solid var(--border);
-        margin-bottom:10px;
-    }
-    .day h4 { margin:0 0 10px; font-size:14px; }
-
-    .block-label {
-        font-size:11px;
-        text-transform:uppercase;
+    .course-sub {
+        font-size:12px;
         color:var(--text-muted);
-        margin-bottom:2px;
+        margin-top:2px;
     }
-    .block {
-        background:#f9fafb;
-        border:1px dashed #d1d5db;
-        border-radius:6px;
-        padding:5px 7px;
+    .course-body {
+        border-top:1px solid var(--border-subtle);
+        padding:12px 16px 16px;
         font-size:12px;
-        margin-bottom:8px;
-        min-height:16px;
     }
 
-    /* Presentation / handout placeholder */
-    .resource-placeholder {
-        margin-top:6px;
-        margin-bottom:4px;
-        padding:4px 6px;
-        border-radius:6px;
-        border:1px dashed #cbd5e1;
-        font-size:11px;
-        color:#374151;
-        background:#f3f4f6;
-    }
+    .course-gd details.course { border-left:3px solid var(--gd-accent); }
+    .course-gd .course-title { color:var(--gd-accent); }
+    .course-hw details.course { border-left:3px solid var(--hw-accent); }
+    .course-hw .course-title { color:var(--hw-accent); }
 
-    /* Week checklists */
-    .week-checklists {
-        margin-top:8px;
-        padding-top:8px;
-        border-top:1px dashed #d1d5db;
-        font-size:11px;
-    }
-    .week-checklists details {
-        margin-bottom:4px;
-        background:#f9fafb;
-        border-radius:8px;
-        border:1px solid #e5e7eb;
-        box-shadow:none;
-    }
-    .week-checklists summary {
-        padding:6px 8px;
-        font-size:11px;
-    }
-    .week-checklists .checklist-body {
-        padding:6px 10px 8px;
-    }
-    .week-checklists ul {
-        margin:0;
-        padding-left:18px;
-    }
-    .week-checklists li {
-        margin-bottom:3px;
-    }
-
-    /* Week notes */
-    .week-notes {
-        margin-top:6px;
-        padding-top:6px;
-        border-top:1px dashed #d1d5db;
-        font-size:11px;
-    }
-    .week-notes-label {
-        margin-bottom:4px;
-        color:#111827;
-    }
-    .week-notes textarea {
-        width:100%;
-        min-height:50px;
-        border-radius:6px;
-        border:1px solid #d1d5db;
-        background:#f9fafb;
-        color:var(--text-main);
-        padding:4px 6px;
-        font-family:inherit;
-        font-size:12px;
-        resize:vertical;
-    }
-
-    /* Course themes */
-    .course-gd details.course {
-        border-left:3px solid var(--gd-accent);
-    }
-    .course-gd > details.course > summary .summary-title {
-        color:var(--gd-accent);
-    }
-    .course-gd .day {
-        background:linear-gradient(120deg, var(--gd-soft), #f9fafb);
-    }
-    .course-gd .block {
-        border-color:rgba(37,99,235,0.3);
-    }
-
-    .course-hw details.course {
-        border-left:3px solid var(--hw-accent);
-    }
-    .course-hw > details.course > summary .summary-title {
-        color:var(--hw-accent);
-    }
-    .course-hw .day {
-        background:linear-gradient(120deg, var(--hw-soft), #f9fafb);
-    }
-    .course-hw .block {
-        border-color:rgba(22,163,74,0.3);
-    }
-
-    .page-break {
-        margin:24px 0;
-        border-top:1px dashed #d1d5db;
-    }
-
-    /* Course-specific resource blocks */
+    /* Course resources (embedded docs) */
     .course-resources {
-        margin-bottom:16px;
-        padding:12px 16px;
-        border-radius:12px;
-        border:1px solid var(--border);
-        background:var(--card-soft);
-        font-size:12px;
+        margin-bottom:12px;
+        padding:10px 12px;
+        border-radius:10px;
+        border:1px solid #1f2937;
+        background:radial-gradient(circle at top,#020617 0,#020617 60%,#000000 100%);
     }
     .course-resources h3 {
         margin:0 0 6px;
-        font-size:14px;
+        font-size:13px;
     }
     .course-resources p {
         margin:0 0 6px;
-        font-size:12px;
+        font-size:11px;
         color:var(--text-muted);
     }
-    .course-resources .cr-card {
-        border-radius:10px;
-        border:1px solid #e5e7eb;
-        background:#ffffff;
-        padding:8px 10px;
+    .course-resources .doc-block {
         margin-bottom:8px;
     }
-    .course-resources .cr-title {
-        font-size:13px;
-        font-weight:600;
-        margin-bottom:2px;
-    }
-    .course-resources .cr-text {
+    .course-resources .doc-block a {
         font-size:11px;
-        color:var(--text-muted);
-        margin-bottom:4px;
     }
-    .course-resources .cr-card a {
+    .course-resources iframe {
+        width:100%;
+        height:260px;
+        border:1px solid #1f2937;
+        border-radius:8px;
+        background:#020617;
+    }
+
+    /* Weeks + days */
+    details.week {
+        background:#020617;
+        border-radius:12px;
+        border:1px solid #1f2937;
+        margin-bottom:10px;
+        overflow:hidden;
+    }
+    summary.week-summary {
+        list-style:none;
+        cursor:pointer;
+        padding:10px 12px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    }
+    summary.week-summary::-webkit-details-marker { display:none; }
+    .week-title { font-size:13px; font-weight:600; }
+    .week-sub { font-size:11px; color:var(--text-muted); }
+    .week-body {
+        border-top:1px solid #111827;
+        padding:8px 10px 10px;
+    }
+
+    details.day-details {
+        background:linear-gradient(120deg,rgba(15,23,42,0.95),rgba(15,23,42,0.96));
+        border-radius:9px;
+        border:1px solid #1f2937;
+        margin-bottom:6px;
+        overflow:hidden;
+    }
+    summary.day-summary {
+        list-style:none;
+        cursor:pointer;
+        padding:7px 9px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        font-size:12px;
+    }
+    summary.day-summary::-webkit-details-marker { display:none; }
+    .day-body {
+        border-top:1px solid #111827;
+        padding:7px 10px 9px;
         font-size:11px;
-        color:#2563eb;
-        text-decoration:underline;
+    }
+    .day-body h4 {
+        margin:0 0 6px;
+        font-size:12px;
+    }
+    .block-label {
+        font-size:10px;
+        text-transform:uppercase;
+        letter-spacing:0.04em;
+        color:#9ca3af;
+        margin-top:4px;
+        margin-bottom:1px;
+    }
+    .block {
+        border-radius:6px;
+        border:1px dashed #334155;
+        background:#020617;
+        padding:4px 6px;
+        min-height:14px;
     }
 
     @media (max-width:640px) {
-        body { padding:70px 8px 40px; }
-        header h1 { font-size:24px; }
-        .main-nav { padding:6px 8px; }
-        .nav-left { gap:6px; }
-        #semester-gantt { font-size:10px; }
-        #clock { font-size:16px; }
-        .qr-row { flex-direction:column; align-items:center; }
+        body { padding:64px 8px 32px; }
+        header h1 { font-size:22px; }
+        .main-nav { padding:6px 6px; }
+        .nav-left { gap:4px; }
+        .course-body { padding:10px 10px 12px; }
     }
 
-    /* Dark-mode override */
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --bg:#050509;
-            --bg-alt:#0b0b11;
-            --card:#111827;
-            --card-soft:#181824;
-            --border:#374151;
-            --border-subtle:#1f2937;
-            --accent:#3b82f6;
-            --accent-soft:rgba(59,130,246,0.16);
-            --accent-2:#a855f7;
-            --accent-3:#22c55e;
-            --text-main:#f9fafb;
-            --text-muted:#cbd5e1;
-
-            --gd-accent:#3b82f6;
-            --gd-soft:rgba(59,130,246,0.16);
-            --hw-accent:#22c55e;
-            --hw-soft:rgba(34,197,94,0.16);
-        }
-        body {
-            background: radial-gradient(circle at top, #111827 0, #020617 50%, #000000 100%);
-            color:var(--text-main);
-        }
-        .main-nav {
-            background:rgba(10,10,18,0.97);
-            border-bottom-color:#1f2937;
-        }
-        .nav-left a:hover {
-            border-color:#4b5563;
-            background:#020617;
-        }
-        .floating-top {
-            background:rgba(15,23,42,0.92);
-            border-color:#4b5563;
-            color:#e5e7eb;
-        }
-        .note-catcher-btn {
-            border-color:#4b5563;
-            box-shadow:0 10px 25px rgba(0,0,0,0.6);
-        }
-        .gantt-bar {
-            background:#020617;
-            border-color:#1f2937;
-        }
-        .day {
-            border-color:var(--border);
-        }
-        .block {
-            background:rgba(15,23,42,0.98);
-            border-color:rgba(148,163,184,0.8);
-        }
-        .resource-placeholder {
-            background:rgba(15,23,42,0.95);
-            border-color:#64748b;
-            color:#e5e7eb;
-        }
-        .week-checklists details {
-            background:rgba(15,23,42,0.9);
-            border-color:#4b5563;
-        }
-        .week-notes textarea {
-            background:#020617;
-            border-color:#4b5563;
-            color:var(--text-main);
-        }
-        #qr-music,
-        #communication,
-        #course-eval-home,
-        #updates details,
-        #notes details,
-        #assignments details,
-        #shared-resources details,
-        .course-resources {
-            box-shadow:0 10px 30px rgba(0,0,0,0.55);
-        }
-        .sr-card,
-        .course-resources .cr-card,
-        .update-item {
-            background:#020617;
-            border-color:#4b5563;
-        }
+    .floating-top {
+        position:fixed;
+        right:12px;
+        bottom:12px;
+        width:34px;
+        height:34px;
+        border-radius:999px;
+        border:1px solid #1f2937;
+        background:#020617;
+        color:#e5e7eb;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        text-decoration:none;
+        font-size:18px;
+        box-shadow:0 12px 28px rgba(0,0,0,0.7);
+        z-index:90;
     }
-
-    /* Print styles */
-    @media print {
-        body {
-            background:#ffffff;
-            color:#111827;
-            padding:0;
-        }
-        .main-nav,
-        .floating-top,
-        .note-catcher-btn,
-        .music-toggle {
-            display:none !important;
-        }
-        .shell {
-            max-width:100%;
-            margin:0;
-        }
-        header {
-            margin:0 0 8px;
-            border-bottom:1px solid #e5e7eb;
-            padding:8px 16px;
-            text-align:left;
-        }
-        header h1 { font-size:20px; }
-        header h2 { font-size:12px; }
-        #today-line { font-size:11px; }
-
-        section {
-            padding:0 16px 8px;
-        }
-        details.course,
-        details.week,
-        details.day-details,
-        #updates details,
-        #notes details,
-        #assignments details,
-        #shared-resources details {
-            box-shadow:none;
-            background:#ffffff;
-            border-color:#d1d5db;
-            border-radius:0;
-            margin:0;
-        }
-        .body {
-            border-top-color:#e5e7eb;
-            padding:10px 16px 12px;
-        }
-        .day {
-            background:#ffffff;
-            border-color:#d1d5db;
-        }
-        .block {
-            background:#f9fafb;
-            border-color:#d1d5db;
-        }
-        .resource-placeholder {
-            background:#f9fafb;
-            border-color:#d1d5db;
-            color:#4b5563;
-        }
-        .week-notes textarea {
-            background:#ffffff;
-            border-color:#d1d5db;
-            color:#111827;
-        }
-        .page-break {
-            page-break-before:always;
-            border:none;
-            margin:0;
-        }
+    .floating-top:hover {
+        background:#111827;
     }
 </style>
 </head>
@@ -961,630 +494,320 @@
 <nav class="main-nav">
     <div class="nav-left">
         <a href="#updates">Updates</a>
-        <a href="#notes">Notes</a>
         <a href="#assignments">Assignments</a>
-        <a href="#shared-resources">Docs</a>
-        <a href="#qr-music">QR + Music</a>
+        <a href="#universal">Universal Resources</a>
         <a href="#communication">Remind</a>
-        <a href="#course-eval-home">Course Eval</a>
         <a href="#gd">Graphic Design</a>
         <a href="#hw">House Wiring</a>
-        <a href="#top">Top</a>
+        <a href="#" id="jump-gd">GD Today</a>
+        <a href="#" id="jump-hw">HW Today</a>
     </div>
-    <div class="nav-right">
-        <span id="clock"></span>
-    </div>
+    <div class="nav-right" id="clock"></div>
 </nav>
 
-<a href="#top" class="floating-top">↑</a>
-<button type="button" class="note-catcher-btn" onclick="openNoteCatcher()">Note Pad</button>
+<a class="floating-top" href="#top">↑</a>
 
 <div class="shell">
 
 <header>
     <h1>Mr. Burke — Class Dashboard</h1>
-    <div id="today-line">Today: <span id="today-string"></span></div>
-    <h2>Graphic Design & House Wiring • Semester ends Friday, Dec 19</h2>
+    <h2>Graphic Design 1 (AT150S/01, AT150S/02) • House Wiring (AT260S/01)</h2>
+    <div id="today-line">Today: <span id="today-string"></span> • Semester ends Friday, Dec 19</div>
 </header>
 
-<!-- GANTT / SEMESTER BAR -->
-<div id="semester-gantt">
-    <div id="semester-gantt-label">Semester Progress (Week 1 → Week 19)</div>
-    <div class="gantt-bar">
-        <div class="gantt-progress" id="gantt-progress"></div>
-        <div class="gantt-weeks" id="gantt-weeks"></div>
-        <div class="gantt-today-marker" id="gantt-today-marker"></div>
+<!-- GANTT -->
+<section id="gantt">
+    <div id="semester-gantt">
+        <div id="semester-gantt-label">Semester Progress (Weeks 1–19)</div>
+        <div class="gantt-bar">
+            <div class="gantt-progress" id="gantt-progress"></div>
+            <div class="gantt-weeks" id="gantt-weeks"></div>
+            <div class="gantt-today-marker" id="gantt-today-marker"></div>
+        </div>
     </div>
-</div>
+</section>
 
-<!-- UPDATES / NEWS -->
+<!-- UPDATES -->
 <section id="updates">
-    <details open>
+    <details class="block" open>
         <summary>
             <div>
-                <div class="updates-title">Announcements / Updates</div>
-                <div class="updates-subtitle">Quick notes to yourself or class-level reminders.</div>
+                <div class="summary-main">Updates / Notes to Self</div>
+                <div class="summary-sub">Sequential quick notes — stored only in this browser.</div>
             </div>
             <span class="chevron">▶</span>
         </summary>
-        <div class="updates-body">
+        <div class="card-body">
             <div id="update-form">
-                <textarea id="update-text" placeholder="Type a quick update (e.g., 'Obs today, GD Phase 2 modeling P4')."></textarea>
-                <button id="update-btn" type="button">Post Update</button>
+                <textarea id="update-text" placeholder="Short update or prompt (ex: 'GD P4 Phase 2 modeling today')."></textarea>
+                <button id="update-btn" type="button">Post update</button>
             </div>
             <div id="updates-list"></div>
         </div>
     </details>
 </section>
 
-<!-- GLOBAL NOTES -->
-<section id="notes">
-    <details>
-        <summary>
-            <div>
-                <div class="notes-title">Global Notes</div>
-                <div class="notes-subtitle">Planning, evaluation notes, or anything you want to remember later.</div>
-            </div>
-            <span class="chevron">▶</span>
-        </summary>
-        <div class="notes-body">
-            <textarea id="global-notes" placeholder="Type general notes here. Auto-saved in this browser."></textarea>
-            <div class="notes-hint">Notes stay locally in this browser unless site data is cleared.</div>
-        </div>
-    </details>
-</section>
-
-<!-- ASSIGNMENTS / DUE LIST -->
+<!-- ASSIGNMENTS -->
 <section id="assignments">
-    <details>
+    <details class="block">
         <summary>
             <div>
-                <div class="assign-title">Assignments / Due Dates Overview</div>
-                <div class="assign-subtitle">Simple glance — edit directly in the HTML as needed.</div>
+                <div class="summary-main">Assignment Tracker</div>
+                <div class="summary-sub">Edit directly in HTML as needed. Simple four-bucket overview.</div>
             </div>
             <span class="chevron">▶</span>
         </summary>
-        <div class="assign-body">
+        <div class="card-body">
             <div class="assign-columns">
                 <div class="assign-col">
                     <h4>Today</h4>
                     <ul>
-                        <!-- Fill as needed -->
+                        <!-- fill or edit here -->
                     </ul>
                 </div>
                 <div class="assign-col">
                     <h4>This Week</h4>
-                    <ul>
-                        <!-- Fill as needed -->
-                    </ul>
+                    <ul></ul>
                 </div>
                 <div class="assign-col">
                     <h4>Upcoming</h4>
-                    <ul>
-                        <!-- Fill as needed -->
-                    </ul>
+                    <ul></ul>
                 </div>
                 <div class="assign-col">
                     <h4>Past Due / Late</h4>
-                    <ul>
-                        <!-- Fill as needed -->
-                    </ul>
+                    <ul></ul>
                 </div>
             </div>
         </div>
     </details>
 </section>
 
-<!-- SHARED RESOURCES (ALL COURSES, SMALL CARDS) -->
-<section id="shared-resources">
-    <details>
+<!-- UNIVERSAL RESOURCES -->
+<section id="universal">
+    <details class="block">
         <summary>
             <div>
-                <div class="sr-title">Shared Resources — Master Doc (All Classes)</div>
-                <div class="sr-subtitle">General info and materials that apply across courses.</div>
+                <div class="summary-main">Universal Resources</div>
+                <div class="summary-sub">Applies to all classes — inspiration, tools, utilities.</div>
             </div>
             <span class="chevron">▶</span>
         </summary>
-        <div class="sr-body">
-            <div class="sr-card">
-                <div class="sr-card-title">Shared Resources Master Doc</div>
-                <div class="sr-card-text">
-                    Open in a new tab for full-screen reading. Use this as a central reference.
-                </div>
-                <a href="https://docs.google.com/document/d/1TU1QOBxMt_WCpxCKikom3Ojj6ySNtMRGKFCyEu3AKlE/edit?usp=sharing" target="_blank">
-                    Open Shared Resources Master Doc
+        <div class="card-body">
+            <div class="resource-list">
+                <a href="https://bitly.com/pages/landing/bringing-us-all-a-bit-closer" target="_blank">
+                    Bringing Us All a Bit Closer
+                    <span>Bitly article / community</span>
+                </a>
+                <a href="https://wetransfer.com/" target="_blank">
+                    WeTransfer
+                    <span>Large file transfer</span>
+                </a>
+                <a href="https://www.cleanpng.com/" target="_blank">
+                    CleanPNG
+                    <span>Transparent PNG assets</span>
+                </a>
+                <a href="http://unsplash.com/" target="_blank">
+                    Unsplash
+                    <span>Free high-res photos</span>
+                </a>
+                <a href="https://www.rainymood.com/" target="_blank">
+                    Rainy Mood
+                    <span>Background sound / focus</span>
+                </a>
+                <a href="https://hipsum.co/?paras=5&type=hipster-centric&start-with-lorem=1" target="_blank">
+                    Hipsum
+                    <span>Placeholder text generator</span>
+                </a>
+                <a href="https://coolors.co/" target="_blank">
+                    Coolors
+                    <span>Color palette generator</span>
+                </a>
+                <a href="https://www.w3schools.com/" target="_blank">
+                    W3Schools
+                    <span>Reference for HTML/CSS/JS</span>
+                </a>
+                <a href="https://undraw.co/illustrations" target="_blank">
+                    unDraw
+                    <span>Free vector illustrations</span>
+                </a>
+                <a href="https://www.sketchdaily.net/" target="_blank">
+                    SketchDaily
+                    <span>Drawing prompts / practice</span>
+                </a>
+                <a href="https://draw.chat/dc24btm1rd0hor5iy1mwrpnztecf4b:lq1bwx6mphgli20twhl2fsateieadoe39izj#p1,0,0,r0,s1,tool=pen" target="_blank">
+                    Draw.Chat Session
+                    <span>Shared drawing board</span>
                 </a>
             </div>
         </div>
     </details>
-
-    <details>
-        <summary>
-            <div>
-                <div class="sr-title">Graphic Design Resources Doc</div>
-                <div class="sr-subtitle">Rubrics, exemplars, and process documents for Graphic Design.</div>
-            </div>
-            <span class="chevron">▶</span>
-        </summary>
-        <div class="sr-body">
-            <div class="sr-card">
-                <div class="sr-card-title">Graphic Design Resources</div>
-                <div class="sr-card-text">
-                    Open in a new tab for rubrics, exemplars, and process guides.
-                </div>
-                <a href="https://docs.google.com/document/d/1tQcetI8HQ3yOfXt9LzP-w99MvsmTveur0t52kx7NK2M/edit?usp=sharing" target="_blank">
-                    Open Graphic Design Resources Doc
-                </a>
-            </div>
-        </div>
-    </details>
-
-    <details>
-        <summary>
-            <div>
-                <div class="sr-title">House Wiring Resources Doc</div>
-                <div class="sr-subtitle">Safety, diagrams, and reference material for House Wiring.</div>
-            </div>
-            <span class="chevron">▶</span>
-        </summary>
-        <div class="sr-body">
-            <div class="sr-card">
-                <div class="sr-card-title">House Wiring Resources</div>
-                <div class="sr-card-text">
-                    Open in a new tab for safety notes, diagrams, and wiring references.
-                </div>
-                <a href="https://docs.google.com/document/d/1cebx0tyz7TfFLTgp4obF9GGHiyXBG5tQGXBpY1lhIpo/edit?usp=sharing" target="_blank">
-                    Open House Wiring Resources Doc
-                </a>
-            </div>
-        </div>
-    </details>
-</section>
-
-<!-- QR CODES + MUSIC -->
-<section id="qr-music">
-    <h2>Quick Access</h2>
-    <p>Scan to open this dashboard or submit assignments. Students can use these straight from the board.</p>
-
-    <div class="qr-row">
-        <div class="qr-block">
-            <h3 style="color:#2563eb;">Dashboard QR</h3>
-            <img src="qrcode_dmburke1982-oss.github.io.png" alt="Dashboard QR Code">
-        </div>
-        <div class="qr-block">
-            <h3 style="color:#16a34a;">Assignment Submission QR</h3>
-            <img src="qrcode_docs.google.com (1).png" alt="Assignment Submission QR Code">
-        </div>
-    </div>
-
-    <div class="submit-link-main">
-        Direct submission portal:
-        <a href="https://forms.gle/K3isYts15QYBc63V6" target="_blank">
-            Submit Assignment (Google Form)
-        </a>
-    </div>
-
-    <div class="music-toggle">
-        <button type="button" onclick="toggleMusic()">Toggle Music</button>
-    </div>
-
-    <audio id="bg-music" loop>
-        <source src="class_theme.mp3" type="audio/mpeg">
-    </audio>
 </section>
 
 <!-- COMMUNICATION / REMIND -->
 <section id="communication">
-    <h2>Communication — Remind</h2>
-    <p>Class announcements and messages are shared through Remind. Use the button or QR code to open the stream.</p>
-
-    <div class="comm-row">
-        <div class="comm-actions">
-            <a class="btn-remind"
-               href="https://www.remind.com/classes/fefg27a7e8/messages/stream/9bedf586-ddb8-49ed-aa3e-70db8da78cca"
-               target="_blank">
-                Open Remind Message Stream
-            </a>
-            <a class="btn-contact"
-               href="mailto:YOUR_EMAIL_HERE?subject=Message%20for%20Mr%20Burke"
-               target="_blank">
-                Contact Mr. Burke (email)
-            </a>
-            <div class="comm-note">
-                Replace <strong>YOUR_EMAIL_HERE</strong> in the HTML with your address.
+    <details class="block">
+        <summary>
+            <div>
+                <div class="summary-main">Communication — Remind</div>
+                <div class="summary-sub">Join the correct class or message Mr. Burke.</div>
+            </div>
+            <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+            <div class="comm-grid">
+                <div class="comm-card">
+                    <div class="comm-title">Graphic Design 1 — AT150S/01</div>
+                    <div class="comm-body">
+                        Use this for announcements, updates, and reminders for GD1, section 01.
+                    </div>
+                    <a href="https://www.remind.com/join/fefg27a7e8" target="_blank">Join via Remind (code @fefg27a7e8)</a>
+                </div>
+                <div class="comm-card">
+                    <div class="comm-title">Graphic Design 1 — AT150S/02</div>
+                    <div class="comm-body">
+                        Use this for announcements, updates, and reminders for GD1, section 02.
+                    </div>
+                    <a href="https://www.remind.com/join/b2c9k8h3f2" target="_blank">Join via Remind (code @b2c9k8h3f2)</a>
+                </div>
+                <div class="comm-card">
+                    <div class="comm-title">House Wiring — AT260S/01</div>
+                    <div class="comm-body">
+                        Use this for announcements, updates, and reminders for House Wiring.
+                    </div>
+                    <a href="https://www.remind.com/join/88kge92bc6" target="_blank">Join via Remind (code @88kge92bc6)</a>
+                </div>
+                <div class="comm-card">
+                    <div class="comm-title">Message Mr. Burke</div>
+                    <div class="comm-body">
+                        Direct contact if email is needed instead of Remind.
+                    </div>
+                    <a href="mailto:YOUR_EMAIL_HERE?subject=Class%20Question%20for%20Mr%20Burke" target="_blank">
+                        Email Mr. Burke
+                    </a>
+                    <div style="font-size:10px;color:#9ca3af;margin-top:4px;">
+                        Replace <strong>YOUR_EMAIL_HERE</strong> in the HTML with your address.
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="comm-qr">
-            <div style="font-size:13px; margin-bottom:4px;">Remind QR</div>
-            <!-- Save your Remind QR code image as qrcode_remind.png in the same folder -->
-            <img src="qrcode_remind.png" alt="Remind QR Code (add file qrcode_remind.png)">
-            <div class="comm-note">
-                Scan to join / view Remind (login required).
-            </div>
-        </div>
-    </div>
+    </details>
 </section>
 
-<!-- COURSE EVALUATION (HOME CARD) -->
-<section id="course-eval-home">
-    <h2>Course Evaluation</h2>
-    <p>Use these links to complete course evaluations at the end of the semester. Replace “#” with your actual evaluation URLs.</p>
-    <a href="#" target="_blank">Graphic Design Evaluation (update link)</a>
-    <a href="#" target="_blank">House Wiring Evaluation (update link)</a>
-</section>
-
-<!-- ====================================================== -->
-<!-- GRAPHIC DESIGN                                         -->
-<!-- ====================================================== -->
-
-<section id="gd" class="course-gd">
-
-<details class="course">
-<summary class="course-summary">
-    <div>
-        <div class="summary-title">Graphic Design</div>
-        <div class="summary-subtitle">Weeks 1–19 • Foundations → Capstone</div>
-    </div>
-    <span class="chevron">▶</span>
-</summary>
-
-<div class="body" id="gd-weeks-container">
-
-    <!-- COURSE RESOURCES (GD) - SMALL CARDS -->
-    <div class="course-resources">
-        <h3>Graphic Design Resources</h3>
-        <p>Open in new tabs. These are small cards so the page stays clean.</p>
-
-        <div class="cr-card">
-            <div class="cr-title">Shared Resources Master Doc</div>
-            <div class="cr-text">General resources for all classes.</div>
-            <a href="https://docs.google.com/document/d/1TU1QOBxMt_WCpxCKikom3Ojj6ySNtMRGKFCyEu3AKlE/edit?usp=sharing" target="_blank">
-                Open Shared Resources Master Doc
-            </a>
-        </div>
-
-        <div class="cr-card">
-            <div class="cr-title">Graphic Design Resources Doc</div>
-            <div class="cr-text">Rubrics, exemplars, and process materials for GD.</div>
-            <a href="https://docs.google.com/document/d/1tQcetI8HQ3yOfXt9LzP-w99MvsmTveur0t52kx7NK2M/edit?usp=sharing" target="_blank">
-                Open Graphic Design Resources Doc
-            </a>
-        </div>
-    </div>
-
-    <!-- Skeleton weeks 1–16 will be injected here by JS -->
-    <div id="gd-skeleton-anchor"></div>
-
-    <!-- Week 17–19 content is same as before (kept intact) -->
-    <!-- WEEK 17 (GD) -->
-    <details class="week">
-    <summary class="week-summary">
+<!-- GRAPHIC DESIGN -->
+<section id="gd" class="course-section course-gd">
+<details class="course" open>
+    <summary class="course-summary">
         <div>
-            <div class="summary-title">Week 17 — Capstone Production Plan</div>
-            <div class="summary-subtitle">Unit: Capstone Phase 2 • Production Plan • Workflow Sequence • Asset Prep</div>
+            <div class="course-title">Graphic Design 1</div>
+            <div class="course-sub">AT150S/01 & AT150S/02 • Weeks 1–19</div>
         </div>
         <span class="chevron">▶</span>
     </summary>
-    <div class="body">
+    <div class="course-body">
 
-        <!-- MON -->
-        <details class="day-details">
-        <summary class="day-summary">
-            <span class="summary-title">Monday</span>
-            <span class="chevron">▶</span>
-        </summary>
-        <div class="body day">
-            <h4>GD Week 17 — Monday</h4>
-            <div class="block-label">WAL</div>
-            <div class="block">Students finalize their Phase 2 Production Plan structure and confirm deliverables for their Capstone.</div>
-            <div class="block-label">Instruction</div>
-            <div class="block">
-                Model converting Phase 1 concept info into Phase 2: deliverables list, elements list, and workflow sequence.
-                <div class="resource-placeholder">Placeholder: Insert Phase 2 overview presentation or modeling slides link here.</div>
+        <!-- Course Remind note -->
+        <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">
+            Communication for this course: use Remind classes AT150S/01 and AT150S/02 (see Communication section above).
+        </div>
+
+        <!-- Course resources (GD) -->
+        <div class="course-resources">
+            <h3>Graphic Design Resources</h3>
+            <p>Embedded docs plus direct links. Scroll inside the frames as needed.</p>
+
+            <div class="doc-block">
+                <strong>Shared Resources Master Doc</strong> —
+                <a href="https://docs.google.com/document/d/1TU1QOBxMt_WCpxCKikom3Ojj6ySNtMRGKFCyEu3AKlE/edit?usp=sharing" target="_blank">
+                    open in new tab
+                </a>
+                <iframe src="https://docs.google.com/document/d/1TU1QOBxMt_WCpxCKikom3Ojj6ySNtMRGKFCyEu3AKlE/preview"></iframe>
             </div>
-            <div class="block-label">Practice</div>
-            <div class="block">Students draft or revise Deliverables, Visible Elements, and Asset List for their project.</div>
-            <div class="block-label">Success Criteria</div>
-            <div class="block">Production Plan shows complete deliverables, a clear asset list, and early workflow steps for each deliverable.</div>
-            <div class="block-label">Teacher Moves</div>
-            <div class="block">1:1 checks, verify project scope, redirect oversized ideas, approve or adjust deliverables list.</div>
-        </div>
-        </details>
 
-        <!-- TUE -->
-        <details class="day-details">
-        <summary class="day-summary">
-            <span class="summary-title">Tuesday</span>
-            <span class="chevron">▶</span>
-        </summary>
-        <div class="body day">
-            <h4>GD Week 17 — Tuesday</h4>
-            <div class="block-label">WAL</div>
-            <div class="block">Students refine workflow sequence steps and confirm required assets for each deliverable.</div>
-            <div class="block-label">Instruction</div>
-            <div class="block">
-                Demonstrate breaking production into small, trackable steps (5–12 steps per deliverable) with realistic timing.
+            <div class="doc-block">
+                <strong>Graphic Design Resources Doc</strong> —
+                <a href="https://docs.google.com/document/d/1tQcetI8HQ3yOfXt9LzP-w99MvsmTveur0t52kx7NK2M/edit?usp=sharing" target="_blank">
+                    open in new tab
+                </a>
+                <iframe src="https://docs.google.com/document/d/1tQcetI8HQ3yOfXt9LzP-w99MvsmTveur0t52kx7NK2M/preview"></iframe>
             </div>
-            <div class="block-label">Practice</div>
-            <div class="block">Update workflow sequence and annotate which assets belong to which deliverables and steps.</div>
-            <div class="block-label">Success Criteria</div>
-            <div class="block">Workflow is ordered, realistic, and aligned with both deliverables and asset requirements.</div>
-            <div class="block-label">Teacher Moves</div>
-            <div class="block">Check step clarity, flag missing steps, enforce sequencing from roughs to finals, approve sequences.</div>
         </div>
-        </details>
 
-        <!-- WED -->
-        <details class="day-details">
-        <summary class="day-summary">
-            <span class="summary-title">Wednesday</span>
-            <span class="chevron">▶</span>
-        </summary>
-        <div class="body day">
-            <h4>GD Week 17 — Wednesday</h4>
-            <div class="block-label">WAL</div>
-            <div class="block">Students complete all Production Plan sections before Thursday’s independent production work.</div>
-            <div class="block-label">Instruction</div>
-            <div class="block">
-                Review sample strong Production Plans and walk through a checklist of required sections for completion.
-                <div class="resource-placeholder">Placeholder: Insert Production Plan checklist handout link here.</div>
-            </div>
-            <div class="block-label">Practice</div>
-            <div class="block">Students finalize all four Phase 2 sections and submit for approval.</div>
-            <div class="block-label">Success Criteria</div>
-            <div class="block">Phase 2 Production Plan is complete, coherent, and approved for Phase 3 asset production.</div>
-            <div class="block-label">Teacher Moves</div>
-            <div class="block">Final checks, document approvals, redirect incomplete plans, schedule make-up time for missing work.</div>
-        </div>
-        </details>
-
-        <!-- THU -->
-        <details class="day-details">
-        <summary class="day-summary">
-            <span class="summary-title">Thursday</span>
-            <span class="chevron">▶</span>
-        </summary>
-        <div class="body day">
-            <h4>GD Week 17 — Thursday</h4>
-            <div class="block-label">WAL</div>
-            <div class="block">Students begin Phase 3: Asset Production using their approved Production Plans.</div>
-            <div class="block-label">Instruction</div>
-            <div class="block">
-                Demonstrate asset folder organization, file naming conventions, and version control for graphics and photos.
-                <div class="resource-placeholder">Placeholder: Insert file management / asset organization mini-handout link here.</div>
-            </div>
-            <div class="block-label">Practice</div>
-            <div class="block">Create Asset Folder and begin first assets (photos, drawings, vector icons, type samples).</div>
-            <div class="block-label">Success Criteria</div>
-            <div class="block">Asset folder exists and includes at least 2–3 completed or in-progress assets clearly labeled.</div>
-            <div class="block-label">Teacher Moves</div>
-            <div class="block">Confirm folder structure, check file naming, approve first assets, redirect low-quality or off-concept work.</div>
-        </div>
-        </details>
-
-        <!-- FRI -->
-        <details class="day-details">
-        <summary class="day-summary">
-            <span class="summary-title">Friday</span>
-            <span class="chevron">▶</span>
-        </summary>
-        <div class="body day">
-            <h4>GD Week 17 — Friday</h4>
-            <div class="block-label">WAL</div>
-            <div class="block">Students continue asset creation and begin early assembly steps in layout software.</div>
-            <div class="block-label">Instruction</div>
-            <div class="block">Mini-demo: exporting assets for layout and placing them into InDesign/Photoshop with correct resolution.</div>
-            <div class="block-label">Practice</div>
-            <div class="block">Work session: finish several key assets and start assembling the first full layout draft.</div>
-            <div class="block-label">Success Criteria</div>
-            <div class="block">5–8 assets complete and at least one main deliverable has a visible first layout draft started.</div>
-            <div class="block-label">Teacher Moves</div>
-            <div class="block">Check asset quality, verify export settings, approve students to move deeper into assembly.</div>
-        </div>
-        </details>
+        <!-- Weeks container -->
+        <div id="gd-weeks"></div>
 
     </div>
-    </details>
-
-    <!-- WEEK 18 (GD) -->
-    <!-- (same as previous version; left intact for brevity) -->
-    <!-- ... for space I am not commenting each line; content structure is identical to last version ... -->
-
-    <!-- WEEK 18 — full content kept (unchanged from last file) -->
-    <!-- WEEK 18 code block omitted here to save scrolling when reading;
-         in your file, keep the same Week 18 section we already generated. -->
-
-    <!-- WEEK 19 (GD finals) -->
-    <details class="week">
-    <summary class="week-summary">
-        <div>
-            <div class="summary-title">Week 19 — Finals & Reflection (GD)</div>
-            <div class="summary-subtitle">Unit: Course Closure • Make-ups • Portfolio • Reflection • Final Turn-in (Fri, Dec 19)</div>
-        </div>
-        <span class="chevron">▶</span>
-    </summary>
-    <div class="body">
-
-        <!-- (Monday–Thursday blocks unchanged from last version) -->
-
-        <!-- FRI — FINAL SUBMISSION + EVAL LINK -->
-        <details class="day-details">
-        <summary class="day-summary"><span class="summary-title">Friday (Final Day)</span><span class="chevron">▶</span></summary>
-        <div class="body day">
-            <h4>GD Week 19 — Friday (Final Day — Dec 19)</h4>
-            <div class="block-label">WAL</div>
-            <div class="block">Students submit final Capstone work and any required portfolio artifacts.</div>
-            <div class="block-label">Instruction</div>
-            <div class="block">Briefly review submission steps, file formats, and how to attach or upload final work.</div>
-            <div class="block-label">Practice</div>
-            <div class="block">Students finalize uploads/links and confirm that all required components are submitted.</div>
-            <div class="block-label">Success Criteria</div>
-            <div class="block">Every student has submitted a final project file or link plus any required reflection/portfolio pieces.</div>
-            <div class="block-label">Teacher Moves</div>
-            <div class="block">Verify submissions as they arrive, record completion, and note any students needing an extension.</div>
-
-            <div class="block-label">Final Submission Link</div>
-            <div class="block">
-                <a href="https://forms.gle/K3isYts15QYBc63V6" target="_blank">
-                    Submit your Graphic Design final (PDF, image, or link)
-                </a>
-            </div>
-
-            <div class="block-label">Course Evaluation</div>
-            <div class="block">
-                <a href="#" target="_blank">
-                    Complete Graphic Design Course Evaluation (update link)
-                </a>
-            </div>
-        </div>
-        </details>
-
-    </div>
-    </details>
-
-</div>
 </details>
-
 </section>
 
-<div class="page-break"></div>
-
-<!-- ====================================================== -->
-<!-- HOUSE WIRING                                           -->
-<!-- ====================================================== -->
-
-<section id="hw" class="course-hw">
-
+<!-- HOUSE WIRING -->
+<section id="hw" class="course-section course-hw">
 <details class="course">
-<summary class="course-summary">
-    <div>
-        <div class="summary-title">House Wiring</div>
-        <div class="summary-subtitle">Weeks 1–19 • Intro, Walls, Circuits, Capstone</div>
-    </div>
-    <span class="chevron">▶</span>
-</summary>
-
-<div class="body" id="hw-weeks-container">
-
-    <!-- COURSE RESOURCES (HW) - SMALL CARDS -->
-    <div class="course-resources">
-        <h3>House Wiring Resources</h3>
-        <p>Open in new tabs. Small cards keep the page easier to scan.</p>
-
-        <div class="cr-card">
-            <div class="cr-title">Shared Resources Master Doc</div>
-            <div class="cr-text">General resources for all classes.</div>
-            <a href="https://docs.google.com/document/d/1TU1QOBxMt_WCpxCKikom3Ojj6ySNtMRGKFCyEu3AKlE/edit?usp=sharing" target="_blank">
-                Open Shared Resources Master Doc
-            </a>
-        </div>
-
-        <div class="cr-card">
-            <div class="cr-title">House Wiring Resources Doc</div>
-            <div class="cr-text">Safety notes, diagrams, and wiring references.</div>
-            <a href="https://docs.google.com/document/d/1cebx0tyz7TfFLTgp4obF9GGHiyXBG5tQGXBpY1lhIpo/edit?usp=sharing" target="_blank">
-                Open House Wiring Resources Doc
-            </a>
-        </div>
-    </div>
-
-    <!-- Skeleton weeks 1–16 will be injected here by JS -->
-    <div id="hw-skeleton-anchor"></div>
-
-    <!-- Week 17–18 content (same as last version) -->
-    <!-- ... -->
-
-    <!-- WEEK 19 (HW finals) -->
-    <details class="week">
-    <summary class="week-summary">
+    <summary class="course-summary">
         <div>
-            <div class="summary-title">Week 19 — Finals & Reflection (HW)</div>
-            <div class="summary-subtitle">Unit: Course Closure • Cleanup • Enrichment • Reflection • Final Turn-in (Fri, Dec 19)</div>
+            <div class="course-title">House Wiring</div>
+            <div class="course-sub">AT260S/01 • Weeks 1–19</div>
         </div>
         <span class="chevron">▶</span>
     </summary>
-    <div class="body">
+    <div class="course-body">
 
-        <!-- (Monday–Thursday blocks unchanged from last version) -->
+        <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">
+            Communication for this course: use Remind class AT260S/01 (see Communication section above).
+        </div>
 
-        <!-- FRI — FINAL SUBMISSION + EVAL LINK -->
-        <details class="day-details">
-        <summary class="day-summary"><span class="summary-title">Friday (Final Day)</span><span class="chevron">▶</span></summary>
-        <div class="body day">
-            <h4>HW Week 19 — Friday (Final Day — Dec 19)</h4>
-            <div class="block-label">WAL</div>
-            <div class="block">Students submit any remaining documentation and complete course closure.</div>
-            <div class="block-label">Instruction</div>
-            <div class="block">Clarify final turn-in expectations and any last-day procedures.</div>
-            <div class="block-label">Practice</div>
-            <div class="block">Students confirm submissions, return remaining materials, and complete any final reflection prompts.</div>
-            <div class="block-label">Success Criteria</div>
-            <div class="block">All required project and documentation components are submitted or accounted for.</div>
-            <div class="block-label">Teacher Moves</div>
-            <div class="block">Verify submissions, finalize grades, and document evidence for evaluation.</div>
+        <!-- Course resources (HW) -->
+        <div class="course-resources">
+            <h3>House Wiring Resources</h3>
+            <p>Embedded reference doc plus direct link.</p>
 
-            <div class="block-label">Final Submission Link</div>
-            <div class="block">
-                <a href="https://forms.gle/K3isYts15QYBc63V6" target="_blank">
-                    Submit your House Wiring final (photo set, PDF, or link)
+            <div class="doc-block">
+                <strong>House Wiring Resources Doc</strong> —
+                <a href="https://docs.google.com/document/d/1cebx0tyz7TfFLTgp4obF9GGHiyXBG5tQGXBpY1lhIpo/edit?usp=sharing" target="_blank">
+                    open in new tab
                 </a>
-            </div>
-
-            <div class="block-label">Course Evaluation</div>
-            <div class="block">
-                <a href="#" target="_blank">
-                    Complete House Wiring Course Evaluation (update link)
-                </a>
+                <iframe src="https://docs.google.com/document/d/1cebx0tyz7TfFLTgp4obF9GGHiyXBG5tQGXBpY1lhIpo/preview"></iframe>
             </div>
         </div>
-        </details>
+
+        <!-- Weeks container -->
+        <div id="hw-weeks"></div>
 
     </div>
-    </details>
-
-</div>
 </details>
-
 </section>
 
-</div>
+</div> <!-- /shell -->
 
 <script>
-/* Clock + Today line (12-hour) */
+/* Clock + Today line */
 (function() {
     const clockEl = document.getElementById('clock');
     const todayEl = document.getElementById('today-string');
-    if (!clockEl || !todayEl) return;
-
     const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
     function pad(n){ return n < 10 ? '0' + n : n; }
 
-    function formatDateTime(now) {
+    function tick() {
+        const now = new Date();
         const d = days[now.getDay()];
         const m = months[now.getMonth()];
         const day = now.getDate();
         let h = now.getHours();
         const mins = pad(now.getMinutes());
         const ampm = h >= 12 ? 'PM' : 'AM';
-        h = h % 12;
-        if (h === 0) h = 12;
-        const timePart = h + ':' + mins + ' ' + ampm;
-        return d + ', ' + m + ' ' + day + ' — ' + timePart;
-    }
-
-    function tick() {
-        const now = new Date();
-        const str = formatDateTime(now);
-        clockEl.textContent = str;
-        todayEl.textContent = str;
+        h = h % 12; if (h === 0) h = 12;
+        const timeStr = h + ':' + mins + ' ' + ampm;
+        const dateStr = d + ', ' + m + ' ' + day + ' — ' + timeStr;
+        if (clockEl) clockEl.textContent = dateStr;
+        if (todayEl) todayEl.textContent = dateStr;
     }
     tick();
     setInterval(tick, 1000);
 })();
 
-/* Gantt / Semester bar */
+/* Gantt + current week */
+let CURRENT_WEEK = 1;
 (function() {
     const weeksEl = document.getElementById('gantt-weeks');
     const progressEl = document.getElementById('gantt-progress');
@@ -1597,122 +820,90 @@
     startDate.setDate(startDate.getDate() - (totalWeeks * 7) + 1);
     const today = new Date();
 
-    function clamp(num, min, max) {
-        return Math.min(Math.max(num, min), max);
-    }
+    function clamp(num,min,max){ return Math.min(Math.max(num,min),max); }
 
     for (let w = 1; w <= totalWeeks; w++) {
-        const div = document.createElement('div');
-        div.className = 'gantt-week-cell';
-        div.textContent = w;
-        div.title = 'Week ' + w;
-        weeksEl.appendChild(div);
+        const cell = document.createElement('div');
+        cell.className = 'gantt-week-cell';
+        cell.textContent = w;
+        weeksEl.appendChild(cell);
     }
 
     const msTotal = endDate - startDate;
     const msElapsed = today - startDate;
     let percent = msTotal > 0 ? (msElapsed / msTotal) * 100 : 0;
-    percent = clamp(percent, 0, 100);
+    percent = clamp(percent,0,100);
 
     progressEl.style.width = percent + '%';
     markerEl.style.left = percent + '%';
 
-    const daysElapsed = msElapsed / (1000 * 60 * 60 * 24);
-    let currentWeek = Math.floor(daysElapsed / 7) + 1;
-    currentWeek = clamp(currentWeek, 1, totalWeeks);
+    const daysElapsed = msElapsed / (1000*60*60*24);
+    CURRENT_WEEK = clamp(Math.floor(daysElapsed / 7) + 1, 1, totalWeeks);
 
     const cells = weeksEl.children;
-    if (cells[currentWeek - 1]) {
-        cells[currentWeek - 1].classList.add('current');
-    }
+    if (cells[CURRENT_WEEK-1]) cells[CURRENT_WEEK-1].classList.add('current');
 })();
 
-/* Updates / News */
+/* Updates storage */
 (function() {
     const STORAGE_KEY = 'mb_updates_v1';
-    const textarea = document.getElementById('update-text');
+    const textEl = document.getElementById('update-text');
     const btn = document.getElementById('update-btn');
-    const list = document.getElementById('updates-list');
+    const listEl = document.getElementById('updates-list');
+    if (!textEl || !btn || !listEl) return;
 
-    function loadUpdates() {
+    function load() {
         try {
             const raw = localStorage.getItem(STORAGE_KEY);
-            if (!raw) return [];
-            return JSON.parse(raw) || [];
-        } catch {
-            return [];
-        }
+            return raw ? JSON.parse(raw) : [];
+        } catch { return []; }
     }
-
-    function saveUpdates(items) {
+    function save(items) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     }
-
-    function renderUpdates() {
-        const items = loadUpdates();
-        list.innerHTML = '';
+    function render() {
+        const items = load();
+        listEl.innerHTML = '';
         if (!items.length) {
-            const msg = document.createElement('div');
-            msg.style.fontSize = '12px';
-            msg.style.color = '#9ca3af';
-            msg.textContent = 'No updates yet. Use the box above to post a quick note.';
-            list.appendChild(msg);
+            const empty = document.createElement('div');
+            empty.style.fontSize = '11px';
+            empty.style.color = '#9ca3af';
+            empty.textContent = 'No updates yet.';
+            listEl.appendChild(empty);
             return;
         }
-        items.slice().reverse().forEach(item => {
+        items.slice().reverse().forEach(it => {
             const div = document.createElement('div');
             div.className = 'update-item';
             const meta = document.createElement('div');
             meta.className = 'update-meta';
-            meta.textContent = item.time;
+            meta.textContent = it.time;
             const body = document.createElement('div');
-            body.textContent = item.text;
+            body.textContent = it.text;
             div.appendChild(meta);
             div.appendChild(body);
-            list.appendChild(div);
+            listEl.appendChild(div);
         });
     }
-
-    if (btn) {
-        btn.addEventListener('click', () => {
-            const text = (textarea.value || '').trim();
-            if (!text) return;
-            const now = new Date();
-            const ts = now.toLocaleString(undefined, {
-                month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'
-            });
-            const items = loadUpdates();
-            items.push({ time: ts, text });
-            saveUpdates(items);
-            textarea.value = '';
-            renderUpdates();
-        });
-    }
-
-    renderUpdates();
-})();
-
-/* Global Notes (auto-save) */
-(function() {
-    const STORAGE_KEY = 'mb_global_notes_v1';
-    const area = document.getElementById('global-notes');
-    if (!area) return;
-    try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved !== null) area.value = saved;
-    } catch {}
-    area.addEventListener('input', () => {
-        try {
-            localStorage.setItem(STORAGE_KEY, area.value);
-        } catch {}
+    btn.addEventListener('click', () => {
+        const text = (textEl.value || '').trim();
+        if (!text) return;
+        const now = new Date();
+        const stamp = now.toLocaleString(undefined,{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+        const items = load();
+        items.push({time:stamp,text});
+        save(items);
+        textEl.value = '';
+        render();
     });
+    render();
 })();
 
-/* Skeleton Week Builder (Weeks 1–16) */
+/* Build skeleton weeks 1–19 for both courses */
 (function() {
     const days = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
 
-    const gdUnitLabels = {
+    const gdUnits = {
         1:'Orientation & Tools',
         2:'Design Elements',
         3:'Design Principles',
@@ -1723,15 +914,18 @@
         8:'Projects & Practice',
         9:'Branding / Identity',
         10:'Poster / Campaign',
-        11:'Pre-Capstone Projects',
-        12:'Pre-Capstone Projects',
+        11:'Pre-Capstone',
+        12:'Pre-Capstone',
         13:'Capstone Phase 1 — Concept',
         14:'Capstone Phase 1 — Concept',
         15:'Capstone Phase 2 — Planning',
-        16:'Capstone Phase 2 — Planning'
+        16:'Capstone Phase 2 — Planning',
+        17:'Capstone Phase 2 — Production Plan',
+        18:'Capstone Phase 3 — Production',
+        19:'Course Closure / Finals'
     };
 
-    const hwUnitLabels = {
+    const hwUnits = {
         1:'Orientation & Safety',
         2:'Tools & Materials',
         3:'Basic Circuits',
@@ -1747,293 +941,107 @@
         13:'Half-Wall Build',
         14:'Half-Wall Build',
         15:'Half-Wall Capstone',
-        16:'Half-Wall Capstone'
+        16:'Half-Wall Capstone',
+        17:'Capstone Planning / Checkouts',
+        18:'Capstone Work / Cleanup',
+        19:'Course Closure / Finals'
     };
 
-    function createSkeletonWeek(weekNumber, coursePrefix, unitName) {
-        const weekDetails = document.createElement('details');
-        weekDetails.className = 'week';
+    function buildWeeks(containerId, prefix, units) {
+        const root = document.getElementById(containerId);
+        if (!root) return;
 
-        const summary = document.createElement('summary');
-        summary.className = 'week-summary';
-        const left = document.createElement('div');
-        const title = document.createElement('div');
-        title.className = 'summary-title';
-        title.textContent = 'Week ' + weekNumber;
-        const subtitle = document.createElement('div');
-        subtitle.className = 'summary-subtitle';
-        subtitle.textContent = 'Unit: ' + (unitName || ('Unit ' + weekNumber)) + ' • Skeleton structure (WAL, Instruction, Practice, Success Criteria, Teacher Moves)';
-        left.appendChild(title);
-        left.appendChild(subtitle);
-        const chev = document.createElement('span');
-        chev.className = 'chevron';
-        chev.textContent = '▶';
-        summary.appendChild(left);
-        summary.appendChild(chev);
+        for (let w = 1; w <= 19; w++) {
+            const weekDetails = document.createElement('details');
+            weekDetails.className = 'week';
+            weekDetails.id = prefix + '-week-' + w;
 
-        const body = document.createElement('div');
-        body.className = 'body';
+            const sum = document.createElement('summary');
+            sum.className = 'week-summary';
 
-        const labels = ['WAL','Instruction','Practice','Success Criteria','Teacher Moves'];
+            const left = document.createElement('div');
+            const t = document.createElement('div');
+            t.className = 'week-title';
+            t.textContent = 'Week ' + w;
+            const sub = document.createElement('div');
+            sub.className = 'week-sub';
+            sub.textContent = 'Unit: ' + (units[w] || ('Unit ' + w)) + ' • WAL / Instruction / Practice / Success Criteria / Teacher Moves';
+            left.appendChild(t);
+            left.appendChild(sub);
 
-        days.forEach(d => {
-            const dayDetails = document.createElement('details');
-            dayDetails.className = 'day-details';
-
-            const daySummary = document.createElement('summary');
-            daySummary.className = 'day-summary';
-            const st = document.createElement('span');
-            st.className = 'summary-title';
-            st.textContent = d;
             const ch = document.createElement('span');
             ch.className = 'chevron';
             ch.textContent = '▶';
-            daySummary.appendChild(st);
-            daySummary.appendChild(ch);
 
-            const dayBodyWrap = document.createElement('div');
-            dayBodyWrap.className = 'body day';
+            sum.appendChild(left);
+            sum.appendChild(ch);
 
-            const h4 = document.createElement('h4');
-            h4.textContent = coursePrefix + ' Week ' + weekNumber + ' — ' + d;
-            dayBodyWrap.appendChild(h4);
+            const body = document.createElement('div');
+            body.className = 'week-body';
 
-            labels.forEach(label => {
-                const blLabel = document.createElement('div');
-                blLabel.className = 'block-label';
-                blLabel.textContent = label;
-                const blBody = document.createElement('div');
-                blBody.className = 'block';
-                dayBodyWrap.appendChild(blLabel);
-                dayBodyWrap.appendChild(blBody);
+            days.forEach(dayName => {
+                const dDetails = document.createElement('details');
+                dDetails.className = 'day-details';
+
+                const dSum = document.createElement('summary');
+                dSum.className = 'day-summary';
+                const dTitle = document.createElement('span');
+                dTitle.textContent = dayName;
+                const dCh = document.createElement('span');
+                dCh.className = 'chevron';
+                dCh.textContent = '▶';
+                dSum.appendChild(dTitle);
+                dSum.appendChild(dCh);
+
+                const dBody = document.createElement('div');
+                dBody.className = 'day-body';
+                const h4 = document.createElement('h4');
+                h4.textContent = prefix.toUpperCase() + ' Week ' + w + ' — ' + dayName;
+                dBody.appendChild(h4);
+
+                ['WAL','Instruction','Practice','Success Criteria','Teacher Moves'].forEach(label => {
+                    const blLabel = document.createElement('div');
+                    blLabel.className = 'block-label';
+                    blLabel.textContent = label;
+                    const bl = document.createElement('div');
+                    bl.className = 'block';
+                    dBody.appendChild(blLabel);
+                    dBody.appendChild(bl);
+                });
+
+                dDetails.appendChild(dSum);
+                dDetails.appendChild(dBody);
+                body.appendChild(dDetails);
             });
 
-            dayDetails.appendChild(daySummary);
-            dayDetails.appendChild(dayBodyWrap);
-            body.appendChild(dayDetails);
-        });
-
-        weekDetails.appendChild(summary);
-        weekDetails.appendChild(body);
-
-        return weekDetails;
+            weekDetails.appendChild(sum);
+            weekDetails.appendChild(body);
+            root.appendChild(weekDetails);
+        }
     }
 
-    const gdAnchor = document.getElementById('gd-skeleton-anchor');
-    const hwAnchor = document.getElementById('hw-skeleton-anchor');
-
-    for (let w = 1; w <= 16; w++) {
-        if (gdAnchor) gdAnchor.appendChild(createSkeletonWeek(w, 'GD', gdUnitLabels[w]));
-        if (hwAnchor) hwAnchor.appendChild(createSkeletonWeek(w, 'HW', hwUnitLabels[w]));
-    }
+    buildWeeks('gd-weeks','gd',gdUnits);
+    buildWeeks('hw-weeks','hw',hwUnits);
 })();
 
-/* Week Checklists (all weeks) */
+/* Jump to today (GD / HW) */
 (function() {
-    const weekBodies = document.querySelectorAll('.week > .body');
-    weekBodies.forEach(weekBody => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'week-checklists';
+    function scrollToWeek(courseId, prefix) {
+        const course = document.querySelector('#' + courseId + ' details.course');
+        const week = document.getElementById(prefix + '-week-' + CURRENT_WEEK);
+        if (!course || !week) return;
+        course.open = true;
+        week.open = true;
+        const rect = week.getBoundingClientRect();
+        const offset = rect.top + window.scrollY - 70;
+        window.scrollTo({top:offset,behavior:'smooth'});
+    }
 
-        const teacherDetails = document.createElement('details');
-        const teacherSummary = document.createElement('summary');
-        teacherSummary.textContent = 'Teacher Checklist (simple reminders)';
-        const teacherBody = document.createElement('div');
-        teacherBody.className = 'checklist-body';
-        teacherBody.innerHTML = '<ul>' +
-            '<li><input type="checkbox"> Materials ready</li>' +
-            '<li><input type="checkbox"> Slides/handouts linked</li>' +
-            '<li><input type="checkbox"> Tech checked (projector, software)</li>' +
-            '<li><input type="checkbox"> Assessment/exit tickets ready</li>' +
-        '</ul>';
-        teacherDetails.appendChild(teacherSummary);
-        teacherDetails.appendChild(teacherBody);
-
-        const studentDetails = document.createElement('details');
-        const studentSummary = document.createElement('summary');
-        studentSummary.textContent = 'Student Checklist (what should be done by end of week)';
-        const studentBody = document.createElement('div');
-        studentBody.className = 'checklist-body';
-        studentBody.innerHTML = '<ul>' +
-            '<li><input type="checkbox"> All daily tasks attempted</li>' +
-            '<li><input type="checkbox"> Any required uploads turned in</li>' +
-            '<li><input type="checkbox"> Missing work list checked</li>' +
-        '</ul>';
-        studentDetails.appendChild(studentSummary);
-        studentDetails.appendChild(studentBody);
-
-        wrapper.appendChild(teacherDetails);
-        wrapper.appendChild(studentDetails);
-
-        weekBody.appendChild(wrapper);
-    });
+    const gdLink = document.getElementById('jump-gd');
+    const hwLink = document.getElementById('jump-hw');
+    if (gdLink) gdLink.addEventListener('click', e => { e.preventDefault(); scrollToWeek('gd','gd'); });
+    if (hwLink) hwLink.addEventListener('click', e => { e.preventDefault(); scrollToWeek('hw','hw'); });
 })();
-
-/* Week Notes (per week, auto-save) */
-(function() {
-    function initWeekNotes(courseId, prefix) {
-        const courseSection = document.getElementById(courseId);
-        if (!courseSection) return;
-        const weekBodies = courseSection.querySelectorAll('.week > .body');
-        weekBodies.forEach((weekBody, index) => {
-            const notesDiv = document.createElement('div');
-            notesDiv.className = 'week-notes';
-            const label = document.createElement('div');
-            label.className = 'week-notes-label';
-            label.textContent = 'Week Notes (auto-saved for this week)';
-            const textarea = document.createElement('textarea');
-            const storageKey = prefix + (index + 1);
-            try {
-                const saved = localStorage.getItem(storageKey);
-                if (saved !== null) textarea.value = saved;
-            } catch {}
-            textarea.addEventListener('input', () => {
-                try {
-                    localStorage.setItem(storageKey, textarea.value);
-                } catch {}
-            });
-            notesDiv.appendChild(label);
-            notesDiv.appendChild(textarea);
-            weekBody.appendChild(notesDiv);
-        });
-    }
-
-    initWeekNotes('gd', 'mb_gd_week_note_');
-    initWeekNotes('hw', 'mb_hw_week_note_');
-})();
-
-/* Auto-open details on print */
-(function() {
-    const openStates = new WeakMap();
-
-    function beforePrint() {
-        document.querySelectorAll('details').forEach(d => {
-            openStates.set(d, d.open);
-            d.open = true;
-        });
-    }
-
-    function afterPrint() {
-        document.querySelectorAll('details').forEach(d => {
-            const wasOpen = openStates.get(d);
-            if (wasOpen === false) d.open = false;
-        });
-    }
-
-    if (window.matchMedia) {
-        const mediaQueryList = window.matchMedia('print');
-        mediaQueryList.addListener(mql => {
-            if (mql.matches) beforePrint();
-            else afterPrint();
-        });
-    }
-    window.addEventListener('beforeprint', beforePrint);
-    window.addEventListener('afterprint', afterPrint);
-})();
-
-/* Music toggle */
-function toggleMusic() {
-    const music = document.getElementById('bg-music');
-    if (!music) return;
-    if (music.paused) {
-        music.play().catch(() => {});
-    } else {
-        music.pause();
-    }
-}
-
-/* Universal Note Pad popup */
-function openNoteCatcher() {
-    const w = window.open('', 'mbNoteCatcher', 'width=700,height=500');
-    if (!w) return;
-    const doc = w.document;
-    doc.open();
-    doc.write(`
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Note Pad — Mr. Burke</title>
-<style>
- body {
-   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-   margin:16px;
-   background:#f9fafb;
-   color:#111827;
- }
- h1 {
-   font-size:18px;
-   margin:0 0 8px;
- }
- textarea {
-   width:100%;
-   height:320px;
-   border:1px solid #cbd5e1;
-   border-radius:8px;
-   padding:8px;
-   resize:vertical;
-   font-family:inherit;
-   font-size:13px;
-   background:#ffffff;
- }
- .toolbar {
-   margin-top:8px;
-   display:flex;
-   gap:8px;
- }
- button {
-   padding:6px 10px;
-   border-radius:6px;
-   border:1px solid #cbd5e1;
-   background:#e5e7eb;
-   cursor:pointer;
-   font-size:13px;
- }
- button:hover {
-   background:#d1d5db;
- }
- .small {
-   font-size:12px;
-   color:#6b7280;
-   margin-top:4px;
- }
-</style>
-</head>
-<body>
-<h1>Note Pad</h1>
-<textarea id="noteArea" placeholder="Type notes here..."></textarea>
-<div class="toolbar">
-  <button id="saveBtn">Save</button>
-  <button id="printBtn">Print</button>
-  <button id="clearBtn">Clear</button>
-</div>
-<div class="small">Notes are stored locally in this browser only.</div>
-<script>
- (function(){
-  const KEY='mb_universal_note_catcher';
-  const area=document.getElementById('noteArea');
-  try{
-    const saved=localStorage.getItem(KEY);
-    if(saved!==null) area.value=saved;
-  }catch(e){}
-  document.getElementById('saveBtn').addEventListener('click',function(){
-    try{localStorage.setItem(KEY,area.value);}catch(e){}
-  });
-  document.getElementById('printBtn').addEventListener('click',function(){
-    window.print();
-  });
-  document.getElementById('clearBtn').addEventListener('click',function(){
-    area.value='';
-    try{localStorage.removeItem(KEY);}catch(e){}
-  });
- })();
 </script>
-</body>
-</html>
-    `);
-    doc.close();
-}
-</script>
-
 </body>
 </html>
